@@ -1,15 +1,19 @@
 [
   {
     "Id": 1,
-    "Name": "Item 1"
+    "Name": "Profil"
   },
   {
     "Id": 2,
-    "Name": "Item 2"
+    "Name": "Inventar"
   },
   {
     "Id": 3,
-    "Name": "Item 3"
+    "Name": "Suche"
+  },
+  {
+    "Id": 4,
+    "Name": "Vereine"
   }
 ]
 

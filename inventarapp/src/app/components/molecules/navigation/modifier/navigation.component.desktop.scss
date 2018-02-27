@@ -1,0 +1,18 @@
+@import "../../../../../assets/basics/css/variables.scss";
+
+.navigation--desktop {
+  display: none;
+}
+
+@media (min-width: $bp-l) {
+  .navigation--desktop {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .navigation {
+      &__item {
+        color: red;
+      }
+    }
+  }
+}

@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 /* SERVICES */
 import { NavigationService } from './services/navigation.service';
 import { NavigationComponent } from './components/molecules/navigation/navigation.component';
+import { HeaderComponent } from './components/molecules/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
