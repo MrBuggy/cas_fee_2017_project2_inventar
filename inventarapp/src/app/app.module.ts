@@ -25,6 +25,13 @@ const appRoutes: Routes = [
   { path: 'society', component: SocietyComponent }
 ];
 
+// Backend
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { firebaseConfig } from '../environments/firebase.config';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +49,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
-    )
+    ),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   providers: [NavigationService, InventoryService],
   bootstrap: [AppComponent]
