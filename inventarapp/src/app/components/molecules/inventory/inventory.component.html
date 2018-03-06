@@ -1,5 +1,5 @@
 <div class="inventory">
-	<div class="inventory__item" *ngFor="let item of inventoryList">
+	<div class="inventory__item" *ngFor="let item of inventoryList" routerLink="/inventory-items">
     <span class="inventory__item-title">{{item.name}}</span>
     <img class="inventory__warning" [hidden]="!item.hasWarning" src="../../../../assets/images/warning.png" alt="warning icon" title="Abweichungen im Inventar">
   </div>

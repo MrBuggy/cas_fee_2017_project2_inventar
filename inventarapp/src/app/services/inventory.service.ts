@@ -10,4 +10,9 @@ export class InventoryService {
     return this.http.get('/assets/mock/inventory/list/list.json')
       .map((res: Response) => res.json());
   }
+
+  loadInventoryItemsList() {
+    return this.http.get('/assets/mock/inventory/list/list-items.json')
+      .map((res: Response) => res.json());
+  }
 }

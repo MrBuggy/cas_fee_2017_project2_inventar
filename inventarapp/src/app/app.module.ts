@@ -15,6 +15,7 @@ import { ProfileComponent } from './components/molecules/profile/profile.compone
 import { InventoryComponent } from './components/molecules/inventory/inventory.component';
 import { SearchComponent } from './components/molecules/search/search.component';
 import { SocietyComponent } from './components/molecules/society/society.component';
+import { InventoryItemsComponent } from './components/molecules/inventory-items/inventory-items.component';
 
 // Route Configuration
 const appRoutes: Routes = [
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'inventory', component: InventoryComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'society', component: SocietyComponent }
+  { path: 'society', component: SocietyComponent },
+  { path: 'inventory-items', component: InventoryItemsComponent }
 ];
 
 @NgModule({
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     InventoryComponent,
     SearchComponent,
-    SocietyComponent
+    SocietyComponent,
+    InventoryItemsComponent
   ],
   imports: [
     BrowserModule,
