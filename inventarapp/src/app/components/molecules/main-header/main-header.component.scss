@@ -1,0 +1,11 @@
+@import "../../../../assets/basics/css/variables.scss";
+
+.main-header {
+  display: flex;
+  justify-content: space-around;
+	border-bottom: 1px solid $heaven-blue;
+
+	&__title {
+		padding: $space-15 $space-5;
+	}
+}

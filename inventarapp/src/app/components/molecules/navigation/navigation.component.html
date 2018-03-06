@@ -1,11 +1,13 @@
 <div class="navigation">
-    <div class="navigation__item" *ngFor="let item of navigationList">
-        {{item.Name}}
+    <div class="navigation__item" *ngFor="let item of navigationList" routerLink="{{item.routerLink}}" routerLinkActive="navigation__item--active">
+        {{item.name}}
     </div>
 </div>
 
 <div class="navigation navigation--desktop">
-    <div class="navigation__item" *ngFor="let item of navigationList">
-        {{item.Name}}
+    <div class="navigation__left">
+        <div class="navigation__item" *ngFor="let item of navigationList" routerLink="{{item.routerLink}}" routerLinkActive="navigation__item--active">
+            {{item.name}}
+        </div>
     </div>
 </div>

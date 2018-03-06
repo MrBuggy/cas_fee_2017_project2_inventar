@@ -8,8 +8,13 @@
 
   &__item {
     padding: $space-15 $space-5;
-    color: $ocean-blue;
+    color: $ultralight-gray;
+    outline: none;
     cursor: pointer;
+  }
+
+  &__item--active {
+    color: $ocean-blue;
   }
 }
 

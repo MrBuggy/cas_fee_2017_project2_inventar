@@ -1,6 +1,20 @@
+@import "../assets/basics/css/variables.scss";
+
 .app {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
+  &__content {
+    overflow: auto;
+    flex: 1 1 auto;
+  }
 }
+
+@media (min-width: $bp-l) {
+  .app {
+    flex-direction: column-reverse;
+  }
+}
+
+
