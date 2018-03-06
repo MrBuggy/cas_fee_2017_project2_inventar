@@ -7,7 +7,8 @@ export class InventoryService {
   constructor(private http: Http) {}
 
   loadInventoryList() {
-    return this.http.get('/assets/mock/inventory/list/list.json')
+    // return this.http.get('/assets/mock/inventory/list/list.json')
+    return this.http.get('https://inventarmaterialtest.firebaseio.com/inventoryTree.json')
       .map((res: Response) => res.json());
   }
 
