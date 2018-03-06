@@ -2,10 +2,15 @@
 
 .main-header {
   display: flex;
-  justify-content: space-around;
-	border-bottom: 1px solid $heaven-blue;
+  justify-content: space-between;
+	border-bottom: 2px solid $heaven-blue;
+
+  &__left,
+  &__right {
+    display: flex;
+  }
 
 	&__title {
-		padding: $space-15 $space-5;
+		padding: $space-15;
 	}
 }

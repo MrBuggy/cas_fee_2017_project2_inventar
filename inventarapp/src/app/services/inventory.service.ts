@@ -3,11 +3,11 @@ import { Http, Response } from "@angular/http";
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class NavigationService {
+export class InventoryService {
   constructor(private http: Http) {}
 
-  loadNavigationList() {
-    return this.http.get('/assets/mock/navigation/list.json')
+  loadInventoryList() {
+    return this.http.get('/assets/mock/inventory/list/list.json')
       .map((res: Response) => res.json());
   }
 }

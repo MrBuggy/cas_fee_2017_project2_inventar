@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 
 /* SERVICES */
 import { NavigationService } from './services/navigation.service';
+import { InventoryService } from './services/inventory.service';
 import { NavigationComponent } from './components/molecules/navigation/navigation.component';
 import { MainHeaderComponent } from './components/molecules/main-header/main-header.component';
 import { ProfileComponent } from './components/molecules/profile/profile.component';
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
       { enableTracing: true }
     )
   ],
-  providers: [NavigationService],
+  providers: [NavigationService, InventoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
