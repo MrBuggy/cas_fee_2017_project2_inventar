@@ -26,3 +26,8 @@ $font-path: '/assets/fonts/OpenSans';
 	font-family: "Open Sans Bold";
 	src: url($font-path + "/OpenSans-Bold.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Open Sans Medium-Light";
+  src: url($font-path + "/OpenSans-Medium-Light.tff") format("truetype");
+}

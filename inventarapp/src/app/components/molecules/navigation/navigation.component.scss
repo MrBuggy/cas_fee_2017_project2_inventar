@@ -1,0 +1,28 @@
+@import "../../../../assets/basics/css/variables.scss";
+
+.navigation {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid $heaven-blue;
+
+  &__item {
+    padding: $space-15 $space-5;
+    color: $ultralight-gray;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__item--active {
+    color: $ocean-blue;
+  }
+}
+
+@media (min-width: $bp-l) {
+  .navigation {
+    display: none;
+  }
+}
+
+@import "./modifier/navigation.component.desktop.scss";

@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Profil",
+    "routerLink": "/profile"
+  },
+  {
+    "id": 2,
+    "name": "Inventar",
+    "routerLink": "/inventory"
+  },
+  {
+    "id": 3,
+    "name": "Suche",
+    "routerLink": "/search"
+  },
+  {
+    "id": 4,
+    "name": "Vereine",
+    "routerLink": "/society"
+  }
+]
+

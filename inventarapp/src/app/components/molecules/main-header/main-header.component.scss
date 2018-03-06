@@ -1,0 +1,53 @@
+@import "../../../../assets/basics/css/variables.scss";
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+	border-bottom: 2px solid $heaven-blue;
+
+  &__left,
+  &__right {
+    display: flex;
+  }
+
+  &__right {
+    padding-right: $space-15;
+    display: flex;
+    align-items: center;
+  }
+
+	&__title {
+		padding: $space-15;
+  }
+
+  &__image-wrapper {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    border: 1px solid $heaven-blue;
+    padding: $space-5;
+    position: relative;
+
+    &::after {
+      content: "!";
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background: $error;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      position: absolute;
+      right: 0;
+      top: 25px;
+      padding: 3px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+  }
+}
