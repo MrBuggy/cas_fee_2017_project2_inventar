@@ -1,6 +1,6 @@
 @import "../../../../assets/basics/css/variables.scss";
 
-.inventory-items {
+.list {
   display: flex;
   flex-direction: column;
 
@@ -39,3 +39,4 @@
     margin-right: $space-20;
   }
 }
+

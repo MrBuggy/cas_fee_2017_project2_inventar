@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from "../../../services/inventory.service";
-import { InventoryListModel } from "../../../models/inventory-list";
+import { InventoryList } from "../../../models/inventory-list";
+import { INVENTORY_LIST } from "../../../models/inventory-lists";
 
 @Component({
   selector: 'inventory',
@@ -8,9 +9,17 @@ import { InventoryListModel } from "../../../models/inventory-list";
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
-  inventoryList: InventoryListModel[];
+  componentName: string = 'Listen';
+  inventoryList: InventoryList[];
+  routerLink: string = "/inventory-items";
+  stateList: Object = {
+    state: 'add',
+    routerLink: '/inventory-list-add'
+  }
 
-  constructor(private _inventoryService: InventoryService) {
+  constructor(
+    private _inventoryService: InventoryService
+  ) {
     this.loadInventoryList();
   }
 
@@ -18,6 +27,6 @@ export class InventoryComponent implements OnInit {
   }
 
   loadInventoryList() {
-    this._inventoryService.loadInventoryList().subscribe((inventoryList: InventoryListModel[]) => this.inventoryList = inventoryList);
+    this._inventoryService.loadInventoryList().subscribe(inventoryList => this.inventoryList = inventoryList);
   }
 }

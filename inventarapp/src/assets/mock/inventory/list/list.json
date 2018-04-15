@@ -3,25 +3,25 @@
     "id": 1,
     "name": "List 1",
     "hasWarning": false,
-    "routerLink": ""
+    "routerLink": "/inventory-items"
   },
   {
     "id": 2,
     "name": "List 2",
     "hasWarning": false,
-    "routerLink": ""
+    "routerLink": "/inventory-items"
   },
   {
     "id": 3,
     "name": "List 3",
     "hasWarning": true,
-    "routerLink": ""
+    "routerLink": "/inventory-items"
   },
   {
     "id": 4,
     "name": "List 4",
     "hasWarning": false,
-    "routerLink": ""
+    "routerLink": "/inventory-items"
   }
 ]
 

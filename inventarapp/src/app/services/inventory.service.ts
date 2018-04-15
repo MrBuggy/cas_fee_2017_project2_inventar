@@ -1,19 +1,26 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import 'rxjs/add/operator/map';
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+
+import { InventoryList } from "../models/inventory-list";
+import { INVENTORY_LIST } from "../models/inventory-lists";
+import { InventoryListItem } from "../models/inventory-list-item";
+import { INVENTORY_LIST_ITEMS } from "../models/inventory-list-items";
 
 @Injectable()
 export class InventoryService {
-  constructor(private http: Http) {}
+  constructor() {}
 
-  loadInventoryList() {
-    // return this.http.get('/assets/mock/inventory/list/list.json')
-    return this.http.get('https://inventarmaterialtest.firebaseio.com/inventoryTree.json')
-      .map((res: Response) => res.json());
+  loadInventoryList(): Observable<InventoryList[]> {
+      return of(INVENTORY_LIST);
   }
 
-  loadInventoryItemsList() {
-    return this.http.get('/assets/mock/inventory/list/list-items.json')
-      .map((res: Response) => res.json());
+  loadInventoryListItems(): Observable<InventoryListItem[]> {
+    return of(INVENTORY_LIST_ITEMS);
+  }
+
+  loadInventoryItem(id: number): Observable<InventoryListItem> {
+    return of(INVENTORY_LIST_ITEMS.find(item => item.id === id));
   }
 }

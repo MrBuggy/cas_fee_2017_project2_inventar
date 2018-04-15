@@ -8,6 +8,7 @@
   &__left,
   &__right {
     display: flex;
+    align-items: center;
   }
 
   &__right {
@@ -29,25 +30,33 @@
     position: relative;
 
     &::after {
-      content: "!";
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
-      background: $error;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      position: absolute;
-      right: 0;
-      top: 25px;
-      padding: 3px;
+      // content: "!";
+      // width: 10px;
+      // height: 10px;
+      // border-radius: 10px;
+      // background: $error;
+      // display: flex;
+      // align-items: center;
+      // justify-content: center;
+      // color: white;
+      // text-align: center;
+      // position: absolute;
+      // right: 0;
+      // top: 25px;
+      // padding: 3px;
+      // content: "\f06a";
+      // font-family: "FontAwesome";
     }
   }
 
   &__image {
     width: 100%;
     height: 100%;
+  }
+
+  &__icon {
+    font-size: 20px;
+    color: $light-gray;
+    padding-left: $space-15;
   }
 }
