@@ -8,11 +8,11 @@
   </div>
   <div class="inventory-item-detail-edit__wrapper">
     <span class="inventory-item-detail-edit__label">Name</span>
-    <input class="inventory-item-detail-edit__data" [(ngModel)]="item.name" value="{{item.name}}">
+    <input class="inventory-item-detail-edit__data" [(ngModel)]="item.name" type="text" value="{{item.name}}">
   </div>
   <div class="inventory-item-detail-edit__wrapper">
     <span class="inventory-item-detail-edit__label">Anzahl</span>
-    <input class="inventory-item-detail-edit__data" [(ngModel)]="item.count" value="{{item.count}}">
+    <input class="inventory-item-detail-edit__data" [(ngModel)]="item.count" type="number" value="{{item.count}}">
   </div>
   <div class="inventory-item-detail-edit__wrapper">
     <span class="inventory-item-detail-edit__label">Einzelwert in CHF {{item.value ? ' / Gesamt: ' + item.count * item.value + ' CHF' : ''}} </span>

@@ -39,6 +39,7 @@ export class InventoryItemDetailEditComponent implements OnInit {
 
   delete() {
     console.log('item should be deleted');
+    this._inventoryService.deleteInventoryItem(this.item);
   }
 
   cancel() {

@@ -16,6 +16,7 @@ import { InventoryItemsComponent } from './components/molecules/inventory-items/
 import { ListComponent } from './components/molecules/list/list.component';
 import { InventoryItemDetailComponent } from './components/molecules/inventory-item-detail/inventory-item-detail.component';
 import { InventoryItemDetailEditComponent } from './components/molecules/inventory-item-detail-edit/inventory-item-detail-edit.component';
+import { InventoryItemDetailAddComponent } from './components/molecules/inventory-item-detail-add/inventory-item-detail-add.component';
 
 /* SERVICES */
 import { NavigationService } from './services/navigation.service';
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
   { path: 'society', component: SocietyComponent },
   { path: 'inventory-items', component: InventoryItemsComponent },
   { path: 'inventory-item-detail/:id', component: InventoryItemDetailComponent },
-  { path: 'inventory-item-detail-edit/:id', component: InventoryItemDetailEditComponent }
+  { path: 'inventory-item-detail-edit/:id', component: InventoryItemDetailEditComponent },
+  { path: 'inventory-item-detail-add', component: InventoryItemDetailAddComponent }
 ];
 
 // Backend
@@ -57,7 +59,8 @@ import { IconComponent } from './components/atoms/icon/icon.component';
     InventoryItemDetailComponent,
     ActionButtonComponent,
     IconComponent,
-    InventoryItemDetailEditComponent
+    InventoryItemDetailEditComponent,
+    InventoryItemDetailAddComponent
   ],
   imports: [
     BrowserModule,

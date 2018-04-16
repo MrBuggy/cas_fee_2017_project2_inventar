@@ -23,4 +23,12 @@ export class InventoryService {
   loadInventoryItem(id: number): Observable<InventoryListItem> {
     return of(INVENTORY_LIST_ITEMS.find(item => item.id === id));
   }
+
+  addInventoryItem(item: any) {
+    of(INVENTORY_LIST_ITEMS.push(item));
+  }
+
+  deleteInventoryItem(item: any) {
+    of(INVENTORY_LIST_ITEMS.splice(-1));
+  }
 }

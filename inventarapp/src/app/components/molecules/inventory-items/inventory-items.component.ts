@@ -14,7 +14,7 @@ export class InventoryItemsComponent implements OnInit {
   routerLink: string;
   stateList: Object = {
     state: 'add',
-    routerLink: ''
+    routerLink: '/inventory-item-detail-add'
   };
 
   constructor(
