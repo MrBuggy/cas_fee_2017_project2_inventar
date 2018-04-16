@@ -41,6 +41,10 @@ export class InventoryItemDetailEditComponent implements OnInit {
     console.log('item should be deleted');
   }
 
+  cancel() {
+    console.log('item edit cancel');
+  }
+
   goBack(): void {
     this.location.back();
   }
