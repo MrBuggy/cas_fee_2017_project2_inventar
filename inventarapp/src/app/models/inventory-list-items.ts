@@ -12,6 +12,30 @@ export const INVENTORY_LIST_ITEMS: InventoryListItem[] = [
     id: 2,
     name: "Item 2",
     hasWarning: true,
+    lending: {
+      from: [
+        {
+          id: 1,
+          count: 1,
+          name: "Mr. Lending",
+          lending: true
+        },
+        {
+          id: 2,
+          count: 2,
+          name: "Mr. Lending 2.0",
+          lending: true
+        }
+      ],
+      to: [
+        {
+          id: 1,
+          count: 1,
+          name: "Mr. Lending 3.0",
+          lending: true
+        }
+      ]
+    },
     count: 7
   },
   {

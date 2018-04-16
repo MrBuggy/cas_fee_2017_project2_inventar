@@ -43,6 +43,7 @@ export class InventoryItemDetailEditComponent implements OnInit {
 
   cancel() {
     console.log('item edit cancel');
+    this.goBack();
   }
 
   goBack(): void {
