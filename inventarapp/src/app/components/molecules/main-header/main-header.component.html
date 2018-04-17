@@ -1,7 +1,8 @@
 <div class="main-header">
   <div class="main-header__left">
-    <!-- <button class="main-header__button"></button> -->
-    <span class="main-header__title">I'm a title</span>
+    <i *ngIf="hasBack" class="fas fa-angle-left main-header__icon" title="" (click)="onBtnBack.emit()"></i>
+    <i *ngIf="hasCancel" class="fas fa-times main-header__icon" title="" (click)="onBtnCancel.emit()"></i>
+    <span class="main-header__title">{{title ? title: 'This is a title'}}</span>
   </div>
   <div class="main-header__right">
     <div class="main-header__image-wrapper">

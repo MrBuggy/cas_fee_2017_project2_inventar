@@ -1,0 +1,6 @@
+<div class="list">
+  <div class="list__item" *ngFor="let item of items" routerLink="{{routerLink}}">
+    <span class="list__item-title">{{displayString}}</span>
+    <i *ngIf="item.hasWarning" class="fas fa-exclamation-triangle list__warning" title="Abweichungen im Inventar"></i>
+  </div>
+</div>

@@ -1,3 +1,14 @@
-<p>
-  profile works!
-</p>
+<main-header [title]="componentName"></main-header>
+
+<div class="profile" *ngFor="let item of userList">
+  <div class="profile__wrapper">
+    <span class="profile__label profile__label--photo">Foto</span>
+    <i class="fas fa-camera profile__photo"></i>
+  </div>
+  <div class="profile__wrapper">
+    <span class="profile__label">Name</span>
+    <span class="profile__data">{{item.name}}</span>
+  </div>
+</div>
+
+<action-button [stateList]="stateList"></action-button>

@@ -1,0 +1,21 @@
+@import "../../../../assets/basics/css/variables.scss";
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  background: darken($heaven-blue, 15);
+  bottom: 15px;
+  right: 15px;
+
+  &__icon {
+    color: white;
+    font-size: 20px;
+  }
+}

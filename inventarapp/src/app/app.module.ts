@@ -2,19 +2,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 /* COMPONENTS */
 import { AppComponent } from './app.component';
-
-/* SERVICES */
-import { NavigationService } from './services/navigation.service';
-import { InventoryService } from './services/inventory.service';
 import { NavigationComponent } from './components/molecules/navigation/navigation.component';
 import { MainHeaderComponent } from './components/molecules/main-header/main-header.component';
 import { ProfileComponent } from './components/molecules/profile/profile.component';
 import { InventoryComponent } from './components/molecules/inventory/inventory.component';
 import { SearchComponent } from './components/molecules/search/search.component';
 import { SocietyComponent } from './components/molecules/society/society.component';
+import { InventoryItemsComponent } from './components/molecules/inventory-items/inventory-items.component';
+import { ListComponent } from './components/molecules/list/list.component';
+import { InventoryItemDetailComponent } from './components/molecules/inventory-item-detail/inventory-item-detail.component';
+import { InventoryItemDetailEditComponent } from './components/molecules/inventory-item-detail-edit/inventory-item-detail-edit.component';
+import { InventoryItemDetailAddComponent } from './components/molecules/inventory-item-detail-add/inventory-item-detail-add.component';
+
+/* SERVICES */
+import { NavigationService } from './services/navigation.service';
+import { InventoryService } from './services/inventory.service';
+import { StateService } from './services/state.service';
 
 // Route Configuration
 const appRoutes: Routes = [
@@ -22,7 +29,11 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'inventory', component: InventoryComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'society', component: SocietyComponent }
+  { path: 'society', component: SocietyComponent },
+  { path: 'inventory-items', component: InventoryItemsComponent },
+  { path: 'inventory-item-detail/:id', component: InventoryItemDetailComponent },
+  { path: 'inventory-item-detail-edit/:id', component: InventoryItemDetailEditComponent },
+  { path: 'inventory-item-detail-add', component: InventoryItemDetailAddComponent }
 ];
 
 // Backend
@@ -31,6 +42,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { firebaseConfig } from '../environments/firebase.config';
+import { ActionButtonComponent } from './components/atoms/action-button/action-button.component';
+import { IconComponent } from './components/atoms/icon/icon.component';
+import { SearchService } from './services/search.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -40,12 +55,20 @@ import { firebaseConfig } from '../environments/firebase.config';
     ProfileComponent,
     InventoryComponent,
     SearchComponent,
-    SocietyComponent
+    SocietyComponent,
+    InventoryItemsComponent,
+    ListComponent,
+    InventoryItemDetailComponent,
+    ActionButtonComponent,
+    IconComponent,
+    InventoryItemDetailEditComponent,
+    InventoryItemDetailAddComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     JsonpModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
@@ -55,7 +78,13 @@ import { firebaseConfig } from '../environments/firebase.config';
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [NavigationService, InventoryService],
+  providers: [
+    NavigationService,
+    InventoryService,
+    StateService,
+    SearchService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

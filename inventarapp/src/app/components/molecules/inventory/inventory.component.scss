@@ -34,8 +34,8 @@
   }
 
   &__warning {
-    width: 20px;
-    height: 20px;
+    font-size: 20px;
+    color: $warning;
     margin-right: $space-20;
   }
 }

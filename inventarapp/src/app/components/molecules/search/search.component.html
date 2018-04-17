@@ -1,3 +1,18 @@
-<p>
-  search works!
-</p>
+<main-header [title]="componentName"></main-header>
+
+<div class="search">
+  <div class="search__filter">
+    <input type="text" class="search__argument" placeholder="Suchbegriff eingeben...">
+    <button class="search__searchBtn" (click)="search()">
+      <i class="fas fa-search search__icon" title="Suche starten..."></i>
+    </button>
+  </div>
+</div>
+
+
+<div class="search__result">
+  <div class="search__result-item" *ngFor="let item of searchResultList" routerLink="/inventory-item-detail/{{item.id}}">
+    <span class="search__result-item-title">{{item.name}} | {{item.count}}</span>
+  </div>
+</div>
+

@@ -1,6 +1,5 @@
-export type InventoryListModel = {
-  id: number,
-  name: string,
-  hasWarning: boolean,
-  routerLink: string
-};
+export class InventoryList {
+  id: number;
+  name: string;
+  hasWarning: boolean;
+}
