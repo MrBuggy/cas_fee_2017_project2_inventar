@@ -1,0 +1,57 @@
+@import "../../../../assets/basics/css/variables.scss";
+
+.search {
+  display: flex;
+  flex-direction: column;
+
+  &__filter {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__argument {
+    padding: 10px;
+    display: flex;
+    flex: 1 1 auto;
+    outline: none;
+  }
+
+  &__searchBtn {
+    border: 1px solid $heaven-blue;
+    background-color: $heaven-blue;
+    outline: none;
+  }
+
+  &__icon {
+    color: white;
+  }
+
+  &__result-item {
+    padding: $space-15;
+    border-bottom: 1px solid $ultralight-gray;
+    position: relative;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 19px;
+      right: 15px;
+      background-image: url('../../../../assets/images/arrow-gray.png');
+      background-position: center;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      width: 9px;
+      height: 14px;
+      transform: rotate(180deg);
+    }
+  }
+
+  &__result-item-title {
+    color: $ocean-blue;
+    font-size: 13px;
+  }
+}

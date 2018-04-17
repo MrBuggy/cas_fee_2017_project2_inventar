@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from "../../../services/search.service";
+import { InventoryListItem } from "../../../models/inventory-list-item";
+import { INVENTORY_LIST_ITEMS } from "../../../models/inventory-list-items";
 
 @Component({
   selector: 'search',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  componentName: string = 'Suche';
+  searchResultList: InventoryListItem[];
 
-  constructor() { }
+  constructor(
+    private _searchService: SearchService
+  ) { }
 
   ngOnInit() {
   }
 
+  search() {
+    this._searchService.loadSearchResults().subscribe(searchResultList => this.searchResultList = searchResultList);
+  }
 }

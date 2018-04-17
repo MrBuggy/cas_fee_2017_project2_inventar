@@ -44,6 +44,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { firebaseConfig } from '../environments/firebase.config';
 import { ActionButtonComponent } from './components/atoms/action-button/action-button.component';
 import { IconComponent } from './components/atoms/icon/icon.component';
+import { SearchService } from './services/search.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { IconComponent } from './components/atoms/icon/icon.component';
   providers: [
     NavigationService,
     InventoryService,
-    StateService
+    StateService,
+    SearchService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
