@@ -4,16 +4,24 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { InventoryList } from "../models/inventory-list";
-import { INVENTORY_LIST } from "../models/inventory-lists";
 import { InventoryListItem } from "../models/inventory-list-item";
 import { INVENTORY_LIST_ITEMS } from "../models/inventory-list-items";
 
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { QueryFn } from 'angularfire2/database/interfaces';
+
 @Injectable()
 export class InventoryService {
-  constructor() {}
+  private apiPath = '/inventoryList';
 
-  loadInventoryList(): Observable<InventoryList[]> {
-      return of(INVENTORY_LIST);
+  inventoryListRef: AngularFireList<InventoryList> = null;
+
+  constructor(private db: AngularFireDatabase) {
+    this.inventoryListRef = db.list(this.apiPath);
+  }
+
+  loadInventoryList(): AngularFireList<InventoryList> {
+    return this.inventoryListRef;
   }
 
   loadInventoryListItems(): Observable<InventoryListItem[]> {

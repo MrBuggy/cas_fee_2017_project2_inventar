@@ -1,4 +1,4 @@
-export class InventoryListItem {
+export interface InventoryListItem {
   id: number;
   name: string;
   count: number;
