@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { InventoryListItem } from "../../../models/inventory-list-item";
-import { InventoryService } from "../../../services/inventory.service";
-
+import { InventoryListItem } from '../../../models/inventory-list-item';
+import { InventoryService } from '../../../services/inventory.service';
 
 @Component({
   selector: 'inventory-item-detail',
@@ -28,11 +27,11 @@ export class InventoryItemDetailComponent implements OnInit {
   }
 
   loadItem(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this._inventoryService.loadInventoryItem(id)
-      .subscribe(item => this.item = item);
+    const id = this.route.snapshot.paramMap.get('id');
+    this._inventoryService.loadInventoryListItem(id)
+    .subscribe(item => this.item = item);
 
-    this.stateList.routerLink = "/inventory-item-detail-edit/" + id;
+    this.stateList.routerLink = '/inventory-item-detail-edit/' + id;
   }
 
   goBack(): void {

@@ -1,5 +1,5 @@
-export interface InventoryListItem {
-  id: number;
+export class InventoryListItem {
+  $key: string;
   name: string;
   count: number;
   hasWarning: boolean;

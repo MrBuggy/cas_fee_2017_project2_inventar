@@ -9,12 +9,11 @@ import { INVENTORY_LIST_ITEMS } from "../../../models/inventory-list-items";
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  componentName: string = 'Suche';
+  componentName = 'Suche';
   searchResultList: InventoryListItem[];
 
-  constructor(
-    private _searchService: SearchService
-  ) { }
+  constructor(private _searchService: SearchService) {
+  }
 
   ngOnInit() {
   }

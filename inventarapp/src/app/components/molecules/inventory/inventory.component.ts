@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryList } from '../../../models/inventory-list';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'inventory',
@@ -8,23 +9,15 @@ import { InventoryList } from '../../../models/inventory-list';
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent {
-  componentName: string = 'Listen';
-  inventoryList: InventoryList[];
-  routerLink: string = '/inventory-items';
+  componentName = 'Listen';
+  inventoryList: Observable<InventoryList[]>;
+  routerLink = '/inventory-items';
   stateList: Object = {
     state: 'add',
     routerLink: '/inventory-list-add'
   };
 
   constructor(private _inventoryService: InventoryService) {
-    this.loadInventoryList();
-  }
-
-  loadInventoryList() {
-    this._inventoryService.loadInventoryList().snapshotChanges().map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    }).subscribe(inventoryList => {
-      this.inventoryList = inventoryList;
-    });
+   this.inventoryList = this._inventoryService.loadInventoryList();
   }
 }
