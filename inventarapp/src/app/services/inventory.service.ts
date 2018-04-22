@@ -52,7 +52,9 @@ export class InventoryService {
      this.db.list(path).push({
       name: item.name,
       count: item.count,
-      value: item.value
+      value: item.value,
+      hasWarning: false,
+      lending: {}
      });
   }
 
@@ -63,7 +65,7 @@ export class InventoryService {
       name: item.name,
       count: item.count,
       value: item.value,
-      lending: item.lending
+      lending: item.lending || {}
     });
   }
 
