@@ -33,7 +33,7 @@ const appRoutes: Routes = [
   { path: 'inventory-items/:id', component: InventoryItemsComponent },
   { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent },
   { path: 'inventory-item-detail-edit/:id/:listID', component: InventoryItemDetailEditComponent },
-  { path: 'inventory-item-detail-add', component: InventoryItemDetailAddComponent }
+  { path: 'inventory-item-detail-add/:listID', component: InventoryItemDetailAddComponent }
 ];
 
 // Backend

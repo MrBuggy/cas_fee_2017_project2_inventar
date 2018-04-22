@@ -21,6 +21,7 @@ export class InventoryItemDetailAddComponent implements OnInit {
     state: 'save',
     routerLink: '/inventory-items'
   };
+  listID: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,14 +30,13 @@ export class InventoryItemDetailAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => this.listID = params['listID']);
   }
 
   save() {
     // TODO Get ListID
-    let listID = '1';
-
     console.log('save');
-    this._inventoryService.addInventoryItem(this.item, listID);
+    this._inventoryService.addInventoryItem(this.item, this.listID);
     this.goBack();
   }
 

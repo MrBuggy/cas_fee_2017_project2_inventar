@@ -14,9 +14,9 @@ export class InventoryItemsComponent implements OnInit {
   inventoryListItems: Observable<InventoryListItem[]>;
   routerLink: string;
   listID: string;
-  stateList: Object = {
+  stateList: any = {
     state: 'add',
-    routerLink: '/inventory-item-detail-add'
+    routerLink: ''
   };
 
   constructor(
@@ -27,6 +27,7 @@ export class InventoryItemsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => this.listID = params['id']);
+    this.stateList.routerLink = `/inventory-item-detail-add/${this.listID}`;
 
     this.route.params.subscribe(params => {
       this.inventoryListItems = this._inventoryService.loadInventoryListItems(params['id']);
