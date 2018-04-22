@@ -2,7 +2,7 @@
 
 <div class="search">
   <div class="search__filter">
-    <input type="text" class="search__argument" placeholder="Suchbegriff eingeben...">
+    <input type="text" class="search__argument" placeholder="Suchbegriff eingeben..." [(ngModel)]="searchString">
     <button class="search__searchBtn" (click)="search()">
       <i class="fas fa-search search__icon" title="Suche starten..."></i>
     </button>

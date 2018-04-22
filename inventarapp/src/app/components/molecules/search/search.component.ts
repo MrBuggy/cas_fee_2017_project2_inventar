@@ -11,6 +11,7 @@ import { INVENTORY_LIST_ITEMS } from "../../../models/inventory-list-items";
 export class SearchComponent implements OnInit {
   componentName = 'Suche';
   searchResultList: InventoryListItem[];
+  searchString: string;
 
   constructor(private _searchService: SearchService) {
   }
@@ -19,6 +20,6 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    this._searchService.loadSearchResults().subscribe(searchResultList => this.searchResultList = searchResultList);
+    this._searchService.loadSearchResults(this.searchString).subscribe(searchResultList => this.searchResultList = searchResultList);
   }
 }

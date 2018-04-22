@@ -11,7 +11,8 @@ export class SearchService {
 
   constructor() { }
 
-  loadSearchResults(): Observable<InventoryListItem[]> {
+  loadSearchResults(searchString: string): Observable<InventoryListItem[]> {
+    // TODO: SUECHEREGNISSE LADEN UND ANALOG INVENTORY-LIST ZURUECK GEBEN
     return of(INVENTORY_LIST_ITEMS);
   }
 }
