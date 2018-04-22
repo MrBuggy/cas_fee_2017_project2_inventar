@@ -50,6 +50,7 @@ import { ActionButtonComponent } from './components/atoms/action-button/action-b
 import { IconComponent } from './components/atoms/icon/icon.component';
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
+import { LoginComponent } from './components/molecules/login/login.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { UserService } from './services/user.service';
     InventoryItemDetailEditComponent,
     InventoryItemDetailAddComponent,
     ListAddComponent,
-    SearchDetailComponent
+    SearchDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
