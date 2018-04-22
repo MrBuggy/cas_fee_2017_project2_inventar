@@ -31,12 +31,8 @@ export class SearchDetailComponent implements OnInit {
     this.route.params.subscribe(params => this.id = params['id']);
     this.route.params.subscribe(params => this.listID = params['listID']);
 
-    this.loadItem();
-  }
-
-  loadItem(): void {
     this._inventoryService.loadInventoryListItem(this.id, this.listID)
-      .subscribe(data => this.item = data);
+      .subscribe(result => this.item = result);
   }
 
   likeItem() {
@@ -46,5 +42,4 @@ export class SearchDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
 }

@@ -27,7 +27,10 @@ export class SearchService {
         const path = `${this.apiPath}/${data.key}/items`;
         this.db.list(path, ref => ref.orderByChild('name').equalTo(searchString)).snapshotChanges().subscribe(items =>
           items.forEach(item => {
-            this.searchResults.push(item.payload.val());
+            const obj = item.payload.val();
+            obj.$key = item.key;
+            obj.listID = data.key;
+            this.searchResults.push(obj);
           }));
       });
     });

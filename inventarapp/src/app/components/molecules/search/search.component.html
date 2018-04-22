@@ -11,7 +11,7 @@
 
 
 <div class="search__result">
-  <div class="search__result-item" *ngFor="let item of searchResultList" [routerLink]="['/search-detail', item.id, item.listID]">
+  <div class="search__result-item" *ngFor="let item of searchResultList" [routerLink]="['/search-detail', item.$key, item.listID]">
     <span class="search__result-item-title">{{item.name}} | {{item.count}}</span>
   </div>
 </div>
