@@ -14,7 +14,7 @@ export class InventoryComponent {
   routerLink = '/inventory-items';
   stateList: Object = {
     state: 'add',
-    routerLink: '/inventory-list-add'
+    routerLink: '/list-add'
   };
 
   constructor(private _inventoryService: InventoryService) {

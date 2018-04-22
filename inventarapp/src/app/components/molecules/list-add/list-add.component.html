@@ -1,0 +1,10 @@
+<main-header [title]="Hinzufuegen" [hasCancel]="true" (onBtnCancel)="cancel()"></main-header>
+
+<div class="list-add">
+  <div class="list-add__wrapper">
+      <span class="list-add__label">Name</span>
+      <input class="list-add__data" [(ngModel)]="listName" type="text">
+  </div>
+</div>
+
+<action-button [stateList]="stateList" (onBtnClick)="save()"></action-button>
