@@ -11,7 +11,6 @@ import { MainHeaderComponent } from './components/molecules/main-header/main-hea
 import { ProfileComponent } from './components/molecules/profile/profile.component';
 import { InventoryComponent } from './components/molecules/inventory/inventory.component';
 import { SearchComponent } from './components/molecules/search/search.component';
-import { SocietyComponent } from './components/molecules/society/society.component';
 import { InventoryItemsComponent } from './components/molecules/inventory-items/inventory-items.component';
 import { ListComponent } from './components/molecules/list/list.component';
 import { InventoryItemDetailComponent } from './components/molecules/inventory-item-detail/inventory-item-detail.component';
@@ -31,7 +30,6 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'inventory', component: InventoryComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'society', component: SocietyComponent },
   { path: 'inventory-items/:id', component: InventoryItemsComponent },
   { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent },
   { path: 'inventory-item-detail-edit/:id/:listID', component: InventoryItemDetailEditComponent },
@@ -59,7 +57,6 @@ import { UserService } from './services/user.service';
     ProfileComponent,
     InventoryComponent,
     SearchComponent,
-    SocietyComponent,
     InventoryItemsComponent,
     ListComponent,
     InventoryItemDetailComponent,

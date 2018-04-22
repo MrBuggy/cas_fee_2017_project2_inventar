@@ -13,11 +13,6 @@
     "id": 3,
     "name": "Suche",
     "routerLink": "/search"
-  },
-  {
-    "id": 4,
-    "name": "Info",
-    "routerLink": "/society"
   }
 ]
 
