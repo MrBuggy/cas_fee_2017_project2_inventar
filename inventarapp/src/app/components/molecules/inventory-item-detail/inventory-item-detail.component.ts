@@ -22,7 +22,10 @@ export class InventoryItemDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private _inventoryService: InventoryService,
     private location: Location
-  ) { }
+  ) {
+    // Init item
+    this.item = new InventoryListItem();
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => this.id = params['id']);
@@ -33,9 +36,10 @@ export class InventoryItemDetailComponent implements OnInit {
 
   loadItem(): void {
     this._inventoryService.loadInventoryListItem(this.id, this.listID)
-    .subscribe(item => this.item = item);
+      .subscribe(data => this.item = data);
 
-    // this.stateList.routerLink = '/inventory-item-detail-edit/' + id;
+    // TODO
+    this.stateList.routerLink = `/inventory-item-detail-edit/${this.id}/${this.listID}`;
   }
 
   goBack(): void {

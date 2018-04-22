@@ -15,7 +15,6 @@ export class InventoryService {
   private apiPath = '/inventoryList';
 
   inventoryListsRef: AngularFireList<InventoryList>;
-  inventoryListRef: AngularFireObject<InventoryList>;
 
   constructor(private db: AngularFireDatabase) {
     this.inventoryListsRef = db.list(this.apiPath);
@@ -41,13 +40,13 @@ export class InventoryService {
     });
   }
 
-  // TODO: rewrite with firebase
   loadInventoryListItem(key: string, listID: string): Observable<InventoryListItem> {
-    console.log(key);
-    console.log(listID);
-    return of(INVENTORY_LIST_ITEMS.find(item => item.$key === key));
+    const path = `${this.apiPath}/${listID}/items/${key}`;
+
+    return this.db.object(path).valueChanges() as Observable<InventoryListItem>;
   }
 
+  // TODO rewrite with firebase
   addInventoryItem(item: any) {
     of(INVENTORY_LIST_ITEMS.push(item));
   }

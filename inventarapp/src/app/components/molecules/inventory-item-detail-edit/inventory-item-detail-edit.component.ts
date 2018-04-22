@@ -27,9 +27,10 @@ export class InventoryItemDetailEditComponent implements OnInit {
   }
 
   loadItem(): void {
+    // TODO
     const id = this.route.snapshot.paramMap.get('id');
-    this._inventoryService.loadInventoryListItem(id)
-      .subscribe(item => this.item = item);
+    // this._inventoryService.loadInventoryListItem(id)
+    //   .subscribe(item => this.item = item);
   }
 
   save() {

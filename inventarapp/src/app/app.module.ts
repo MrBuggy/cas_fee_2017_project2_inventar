@@ -30,12 +30,9 @@ const appRoutes: Routes = [
   { path: 'inventory', component: InventoryComponent },
   { path: 'search', component: SearchComponent },
   { path: 'society', component: SocietyComponent },
-  { path: 'inventory-items/:id', component: InventoryItemsComponent,
-    children: [
-      { path: 'inventory-item-detail-edit', component: InventoryItemDetailEditComponent }
-    ]
-  },
+  { path: 'inventory-items/:id', component: InventoryItemsComponent },
   { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent },
+  { path: 'inventory-item-detail-edit/:id/:listID', component: InventoryItemsComponent },
   { path: 'inventory-item-detail-add', component: InventoryItemDetailAddComponent }
 ];
 
