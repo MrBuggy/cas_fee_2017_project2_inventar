@@ -51,6 +51,7 @@ import { IconComponent } from './components/atoms/icon/icon.component';
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 import { LoginComponent } from './components/molecules/login/login.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { LoginComponent } from './components/molecules/login/login.component';
     InventoryService,
     StateService,
     SearchService,
-    UserService
+    UserService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
