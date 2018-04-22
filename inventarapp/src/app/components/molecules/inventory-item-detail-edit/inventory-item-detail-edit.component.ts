@@ -10,7 +10,10 @@ import { InventoryListItem } from "../../../models/inventory-list-item";
   styleUrls: ['./inventory-item-detail-edit.component.scss']
 })
 export class InventoryItemDetailEditComponent implements OnInit {
-  @Input() item: InventoryListItem;
+  item: InventoryListItem;
+  id: string;
+  listID: string;
+
   stateList = {
     state: 'save',
     routerLink: '/inventory-items'
@@ -23,18 +26,20 @@ export class InventoryItemDetailEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => this.id = params['id']);
+    this.route.params.subscribe(params => this.listID = params['listID']);
+
     this.loadItem();
   }
 
   loadItem(): void {
-    // TODO
-    const id = this.route.snapshot.paramMap.get('id');
-    // this._inventoryService.loadInventoryListItem(id)
-    //   .subscribe(item => this.item = item);
+    this._inventoryService.loadInventoryListItem(this.id, this.listID)
+    .subscribe(data => this.item = data);
   }
 
   save() {
     console.log('save');
+    this._inventoryService.addInventoryItem(this.item, this.listID);
     this.goBack();
   }
 

@@ -47,7 +47,8 @@ export class InventoryService {
   }
 
   // TODO rewrite with firebase
-  addInventoryItem(item: any) {
+  addInventoryItem(item: any, listID: string) {
+    // DO MUSCH DE SAVE UF FIREBASE MACHE -> SGANZE ITEM HESH + LISTE ID
     of(INVENTORY_LIST_ITEMS.push(item));
   }
 
