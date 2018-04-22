@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { User } from "../models/user";
-import { USER_OBJECT } from "../models/user-object";
+import { User } from '../models/user';
+import { USER_OBJECT } from '../models/user-object';
 
 @Injectable()
 export class UserService {

@@ -1,32 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { InventoryService } from "../../../services/inventory.service";
-import { InventoryList } from "../../../models/inventory-list";
-import { INVENTORY_LIST } from "../../../models/inventory-lists";
+import { Component } from '@angular/core';
+import { InventoryService } from '../../../services/inventory.service';
+import { InventoryList } from '../../../models/inventory-list';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'inventory',
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.scss']
 })
-export class InventoryComponent implements OnInit {
-  componentName: string = 'Listen';
-  inventoryList: InventoryList[];
-  routerLink: string = "/inventory-items";
+export class InventoryComponent {
+  componentName = 'Listen';
+  inventoryList: Observable<InventoryList[]>;
+  routerLink = '/inventory-items';
   stateList: Object = {
     state: 'add',
-    routerLink: '/inventory-list-add'
-  }
+    routerLink: '/list-add'
+  };
 
-  constructor(
-    private _inventoryService: InventoryService
-  ) {
-    this.loadInventoryList();
-  }
-
-  ngOnInit() {
-  }
-
-  loadInventoryList() {
-    this._inventoryService.loadInventoryList().subscribe(inventoryList => this.inventoryList = inventoryList);
+  constructor(private _inventoryService: InventoryService) {
+   this.inventoryList = this._inventoryService.loadInventoryList();
   }
 }

@@ -1,5 +1,8 @@
+import { InventoryListItem } from './inventory-list-item';
+
 export class InventoryList {
-  id: number;
+  $key: string;
   name: string;
   hasWarning: boolean;
+  items: InventoryListItem[];
 }

@@ -1,5 +1,5 @@
 export class InventoryListItem {
-  id: number;
+  $key: string;
   name: string;
   count: number;
   hasWarning: boolean;

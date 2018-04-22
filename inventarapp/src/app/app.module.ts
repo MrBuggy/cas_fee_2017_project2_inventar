@@ -17,6 +17,8 @@ import { ListComponent } from './components/molecules/list/list.component';
 import { InventoryItemDetailComponent } from './components/molecules/inventory-item-detail/inventory-item-detail.component';
 import { InventoryItemDetailEditComponent } from './components/molecules/inventory-item-detail-edit/inventory-item-detail-edit.component';
 import { InventoryItemDetailAddComponent } from './components/molecules/inventory-item-detail-add/inventory-item-detail-add.component';
+import { ListAddComponent } from './components/molecules/list-add/list-add.component';
+import { SearchDetailComponent } from './components/molecules/search-detail/search-detail.component';
 
 /* SERVICES */
 import { NavigationService } from './services/navigation.service';
@@ -30,10 +32,12 @@ const appRoutes: Routes = [
   { path: 'inventory', component: InventoryComponent },
   { path: 'search', component: SearchComponent },
   { path: 'society', component: SocietyComponent },
-  { path: 'inventory-items', component: InventoryItemsComponent },
-  { path: 'inventory-item-detail/:id', component: InventoryItemDetailComponent },
-  { path: 'inventory-item-detail-edit/:id', component: InventoryItemDetailEditComponent },
-  { path: 'inventory-item-detail-add', component: InventoryItemDetailAddComponent }
+  { path: 'inventory-items/:id', component: InventoryItemsComponent },
+  { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent },
+  { path: 'inventory-item-detail-edit/:id/:listID', component: InventoryItemDetailEditComponent },
+  { path: 'inventory-item-detail-add/:listID', component: InventoryItemDetailAddComponent },
+  { path: 'list-add', component: ListAddComponent },
+  { path: 'search-detail/:id/:listID', component: SearchDetailComponent }
 ];
 
 // Backend
@@ -62,7 +66,9 @@ import { UserService } from './services/user.service';
     ActionButtonComponent,
     IconComponent,
     InventoryItemDetailEditComponent,
-    InventoryItemDetailAddComponent
+    InventoryItemDetailAddComponent,
+    ListAddComponent,
+    SearchDetailComponent
   ],
   imports: [
     BrowserModule,

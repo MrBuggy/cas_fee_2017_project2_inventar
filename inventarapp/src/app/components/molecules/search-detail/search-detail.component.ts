@@ -1,20 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryListItem } from '../../../models/inventory-list-item';
 import { InventoryService } from '../../../services/inventory.service';
 
 @Component({
-  selector: 'inventory-item-detail',
-  templateUrl: './inventory-item-detail.component.html',
-  styleUrls: ['./inventory-item-detail.component.scss']
+  selector: 'search-detail',
+  templateUrl: './search-detail.component.html',
+  styleUrls: ['./search-detail.component.scss']
 })
-export class InventoryItemDetailComponent implements OnInit {
+export class SearchDetailComponent implements OnInit {
   item: InventoryListItem;
   id: string;
   listID: string;
   stateList = {
-    state: 'edit',
+    state: 'like',
     routerLink: ''
   };
 
@@ -27,18 +27,16 @@ export class InventoryItemDetailComponent implements OnInit {
     this.item = new InventoryListItem();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.params.subscribe(params => this.id = params['id']);
     this.route.params.subscribe(params => this.listID = params['listID']);
 
-    this.loadItem();
+    this._inventoryService.loadInventoryListItem(this.id, this.listID)
+      .subscribe(result => this.item = result);
   }
 
-  loadItem(): void {
-    this._inventoryService.loadInventoryListItem(this.id, this.listID)
-      .subscribe(data => this.item = data);
-
-    this.stateList.routerLink = `/inventory-item-detail-edit/${this.id}/${this.listID}`;
+  likeItem() {
+    console.log('LIKE THIS ONE!');
   }
 
   goBack(): void {

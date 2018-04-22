@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { InventoryService } from "../../../services/inventory.service";
-import { InventoryListItem } from "../../../models/inventory-list-item";
-import { INVENTORY_LIST_ITEMS } from "../../../models/inventory-list-items";
+import { InventoryService } from '../../../services/inventory.service';
+import { InventoryListItem } from '../../../models/inventory-list-item';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'inventory-items',
@@ -10,25 +11,27 @@ import { Location } from '@angular/common';
   styleUrls: ['./inventory-items.component.scss']
 })
 export class InventoryItemsComponent implements OnInit {
-  inventoryListItems: InventoryListItem[];
+  inventoryListItems: Observable<InventoryListItem[]>;
   routerLink: string;
-  stateList: Object = {
+  listID: string;
+  stateList: any = {
     state: 'add',
-    routerLink: '/inventory-item-detail-add'
+    routerLink: ''
   };
 
   constructor(
     private _inventoryService: InventoryService,
-    private location: Location
-  ) {
-    this.loadInventoryItemsList();
-  }
+    private location: Location,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-  }
+    this.route.params.subscribe(params => this.listID = params['id']);
+    this.stateList.routerLink = `/inventory-item-detail-add/${this.listID}`;
 
-  loadInventoryItemsList() {
-    this._inventoryService.loadInventoryListItems().subscribe(inventoryListItems => this.inventoryListItems = inventoryListItems);
+    this.route.params.subscribe(params => {
+      this.inventoryListItems = this._inventoryService.loadInventoryListItems(params['id']);
+    });
   }
 
   goBack(): void {

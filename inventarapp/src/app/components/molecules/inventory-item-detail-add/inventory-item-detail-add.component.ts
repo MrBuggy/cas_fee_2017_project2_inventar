@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { InventoryService } from "../../../services/inventory.service";
-import { InventoryListItem } from "../../../models/inventory-list-item";
+import { InventoryService } from '../../../services/inventory.service';
+import { InventoryListItem } from '../../../models/inventory-list-item';
 
 @Component({
   selector: 'inventory-item-detail-add',
@@ -21,6 +21,7 @@ export class InventoryItemDetailAddComponent implements OnInit {
     state: 'save',
     routerLink: '/inventory-items'
   };
+  listID: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,11 +30,13 @@ export class InventoryItemDetailAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => this.listID = params['listID']);
   }
 
   save() {
+    // TODO Get ListID
     console.log('save');
-    this._inventoryService.addInventoryItem(this.item);
+    this._inventoryService.addInventoryItem(this.item, this.listID);
     this.goBack();
   }
 
