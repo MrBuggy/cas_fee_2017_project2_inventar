@@ -62,7 +62,8 @@ export class InventoryService {
     this.db.object(path).update({
       name: item.name,
       count: item.count,
-      value: item.value
+      value: item.value,
+      lending: item.lending
     });
   }
 

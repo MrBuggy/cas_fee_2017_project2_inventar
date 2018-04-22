@@ -38,7 +38,6 @@ export class InventoryItemDetailComponent implements OnInit {
     this._inventoryService.loadInventoryListItem(this.id, this.listID)
       .subscribe(data => this.item = data);
 
-    // TODO
     this.stateList.routerLink = `/inventory-item-detail-edit/${this.id}/${this.listID}`;
   }
 
