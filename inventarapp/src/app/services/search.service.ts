@@ -17,15 +17,15 @@ export class SearchService {
   searchResults: InventoryListItem[];
 
   constructor(private db: AngularFireDatabase) {
-    this.searchResults = [];
     this.inventoryListsRef = db.list(this.apiPath);
   }
 
   loadSearchResults(searchString: string): InventoryListItem[] {
+    this.searchResults = [];
     this.db.list(this.apiPath).snapshotChanges().subscribe(datas => {
       datas.forEach(data => {
         const path = `${this.apiPath}/${data.key}/items`;
-        this.db.list(path).snapshotChanges().subscribe(items =>
+        this.db.list(path, ref => ref.orderByChild('name').equalTo(searchString)).snapshotChanges().subscribe(items =>
           items.forEach(item => {
             this.searchResults.push(item.payload.val());
           }));

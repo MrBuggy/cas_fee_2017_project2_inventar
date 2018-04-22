@@ -1,22 +1,18 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 
-import { InventoryList } from "../models/inventory-list";
-import { InventoryListItem } from "../models/inventory-list-item";
-import { INVENTORY_LIST_ITEMS } from "../models/inventory-list-items";
+import { InventoryList } from '../models/inventory-list';
+import { InventoryListItem } from '../models/inventory-list-item';
+import { INVENTORY_LIST_ITEMS } from '../models/inventory-list-items';
 
-import {
-  AngularFireDatabase,
-  AngularFireList,
-  AngularFireObject
-} from "angularfire2/database";
-import { QueryFn } from "angularfire2/database/interfaces";
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { QueryFn } from 'angularfire2/database/interfaces';
 
 @Injectable()
 export class InventoryService {
-  private apiPath = "/inventoryList";
+  private apiPath = '/inventoryList';
 
   inventoryListsRef: AngularFireList<InventoryList>;
 
@@ -25,10 +21,8 @@ export class InventoryService {
   }
 
   loadInventoryList(): Observable<InventoryList[]> {
-    return this.inventoryListsRef.snapshotChanges().map(arr => {
-      return arr.map(snap =>
-        Object.assign(snap.payload.val(), { $key: snap.key })
-      );
+    return this.inventoryListsRef.snapshotChanges().map((arr) => {
+      return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }));
     });
   }
 
@@ -39,35 +33,29 @@ export class InventoryService {
   loadInventoryListItems(key: string): Observable<InventoryListItem[]> {
     const path = `${this.apiPath}/${key}/items`;
 
-    return this.db
-      .list(path)
-      .snapshotChanges()
-      .map(arr => {
-        return arr.map(snap =>
-          Object.assign(snap.payload.val(), { $key: snap.key })
-        );
-      });
+    return this.db.list(path).snapshotChanges().map((arr) => {
+      return arr.map((snap) =>
+        Object.assign(snap.payload.val(), { $key: snap.key })
+      );
+    });
   }
 
-  loadInventoryListItem(
-    key: string,
-    listID: string
-  ): Observable<InventoryListItem> {
+  loadInventoryListItem(key: string, listID: string): Observable<InventoryListItem> {
     const path = `${this.apiPath}/${listID}/items/${key}`;
 
     return this.db.object(path).valueChanges() as Observable<InventoryListItem>;
   }
 
   addInventoryItem(item: any, listID: string) {
-    const path = `${this.apiPath}/${listID}/items`;
+     const path = `${this.apiPath}/${listID}/items`;
 
-    this.db.list(path).push({
+     this.db.list(path).push({
       name: item.name,
       count: item.count,
       value: item.value,
       hasWarning: false,
       lending: {}
-    });
+     });
   }
 
   editInventoryItem(item: any, key: string, listID: string) {
@@ -76,6 +64,7 @@ export class InventoryService {
     this.db.object(path).update({
       name: item.name,
       count: item.count,
+      hasWarning: item.hasWarning || false,
       value: item.value,
       lending: item.lending || {}
     });
@@ -85,9 +74,5 @@ export class InventoryService {
     const path = `${this.apiPath}/${listID}/items/${key}`;
 
     this.db.object(path).remove();
-  }
-
-  addInventoryList(listName: string) {
-    // TODO: SAVE INVENTORY
   }
 }
