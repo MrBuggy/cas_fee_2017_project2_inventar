@@ -25,14 +25,11 @@ export class ListAddComponent implements OnInit {
   }
 
   save() {
-    // TODO: SAVE LIST
-    console.log('save');
     this._inventoryService.addInventoryList(this.listName);
     this.goBack();
   }
 
   cancel() {
-    console.log('item edit cancel');
     this.goBack();
   }
 

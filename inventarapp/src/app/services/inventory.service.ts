@@ -77,6 +77,11 @@ export class InventoryService {
   }
 
   addInventoryList(listName: string) {
-    //TODO: LIST ADD
+    const list = new InventoryList();
+    list.name = listName;
+    list.hasWarning = false;
+    list.items = new Array<InventoryListItem>();
+
+    this.inventoryListsRef.push(list);
   }
 }
