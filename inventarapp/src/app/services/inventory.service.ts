@@ -46,13 +46,29 @@ export class InventoryService {
     return this.db.object(path).valueChanges() as Observable<InventoryListItem>;
   }
 
-  // TODO rewrite with firebase
   addInventoryItem(item: any, listID: string) {
-    // DO MUSCH DE SAVE UF FIREBASE MACHE -> SGANZE ITEM HESH + LISTE ID
-    of(INVENTORY_LIST_ITEMS.push(item));
+     const path = `${this.apiPath}/${listID}/items`;
+
+     this.db.list(path).push({
+      name: item.name,
+      count: item.count,
+      value: item.value
+     });
   }
 
-  deleteInventoryItem(item: any) {
-    of(INVENTORY_LIST_ITEMS.splice(-1));
+  editInventoryItem(item: any, key: string, listID: string) {
+    const path = `${this.apiPath}/${listID}/items/${key}`;
+
+    this.db.object(path).update({
+      name: item.name,
+      count: item.count,
+      value: item.value
+    });
+  }
+
+  deleteInventoryItem(key: string, listID: string) {
+    const path = `${this.apiPath}/${listID}/items/${key}`;
+
+    this.db.object(path).remove();
   }
 }

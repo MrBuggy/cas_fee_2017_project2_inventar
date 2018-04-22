@@ -16,14 +16,16 @@ export class InventoryItemDetailEditComponent implements OnInit {
 
   stateList = {
     state: 'save',
-    routerLink: '/inventory-items'
+    routerLink: ''
   };
 
   constructor(
     private route: ActivatedRoute,
     private _inventoryService: InventoryService,
     private location: Location
-  ) { }
+  ) {
+    this.item = new InventoryListItem();
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => this.id = params['id']);
@@ -34,18 +36,18 @@ export class InventoryItemDetailEditComponent implements OnInit {
 
   loadItem(): void {
     this._inventoryService.loadInventoryListItem(this.id, this.listID)
-    .subscribe(data => this.item = data);
+      .subscribe(data => this.item = data);
   }
 
   save() {
-    console.log('save');
-    this._inventoryService.addInventoryItem(this.item, this.listID);
+    this._inventoryService.editInventoryItem(this.item, this.id, this.listID);
+    this.stateList.routerLink = `/inventory-items/${this.id}/${this.listID}`;
     this.goBack();
   }
 
   delete() {
-    console.log('item should be deleted');
-    this._inventoryService.deleteInventoryItem(this.item);
+    this._inventoryService.deleteInventoryItem(this.id, this.listID);
+    this.stateList.routerLink = `/inventory-items/${this.listID}`;
     this.goBack();
   }
 

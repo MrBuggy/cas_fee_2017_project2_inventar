@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { InventoryService } from "../../../services/inventory.service";
-import { InventoryListItem } from "../../../models/inventory-list-item";
+import { InventoryService } from '../../../services/inventory.service';
+import { InventoryListItem } from '../../../models/inventory-list-item';
 
 @Component({
   selector: 'inventory-item-detail-add',
@@ -32,8 +32,11 @@ export class InventoryItemDetailAddComponent implements OnInit {
   }
 
   save() {
+    // TODO Get ListID
+    let listID = '1';
+
     console.log('save');
-    this._inventoryService.addInventoryItem(this.item);
+    this._inventoryService.addInventoryItem(this.item, listID);
     this.goBack();
   }
 
