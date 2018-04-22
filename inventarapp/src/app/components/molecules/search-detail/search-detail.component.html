@@ -1,0 +1,22 @@
+<main-header [title]="item.name" [hasBack]="true" (onBtnBack)="goBack()"></main-header>
+
+<div class="search-detail">
+  <div class="search-detail__wrapper">
+    <span class="search-detail__label search-detail__label--photo">Foto</span>
+    <i class="fas fa-camera search-detail__photo"></i>
+  </div>
+  <div class="search-detail__wrapper">
+    <span class="search-detail__label">Name</span>
+    <span class="search-detail__data">{{item.name}}</span>
+  </div>
+  <div class="search-detail__wrapper">
+    <span class="search-detail__label">Anzahl</span>
+    <span class="search-detail__data">{{item.count}}</span>
+  </div>
+  <div *ngIf="item.value" class="search-detail__wrapper">
+    <span class="search-detail__label">Gesamtwert in CHF</span>
+    <span class="search-detail__data">{{item.count * item.value}}</span>
+  </div>
+</div>
+
+<action-button [stateList]="stateList"></action-button>
