@@ -32,10 +32,10 @@ const appRoutes: Routes = [
   { path: 'society', component: SocietyComponent },
   { path: 'inventory-items/:id', component: InventoryItemsComponent,
     children: [
-      { path: 'inventory-item-detail', component: InventoryItemDetailComponent },
       { path: 'inventory-item-detail-edit', component: InventoryItemDetailEditComponent }
     ]
   },
+  { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent },
   { path: 'inventory-item-detail-add', component: InventoryItemDetailAddComponent }
 ];
 

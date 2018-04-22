@@ -42,7 +42,9 @@ export class InventoryService {
   }
 
   // TODO: rewrite with firebase
-  loadInventoryListItem(key: string): Observable<InventoryListItem> {
+  loadInventoryListItem(key: string, listID: string): Observable<InventoryListItem> {
+    console.log(key);
+    console.log(listID);
     return of(INVENTORY_LIST_ITEMS.find(item => item.$key === key));
   }
 

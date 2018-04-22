@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class InventoryItemsComponent implements OnInit {
   inventoryListItems: Observable<InventoryListItem[]>;
   routerLink: string;
+  listID: string;
   stateList: Object = {
     state: 'add',
     routerLink: '/inventory-item-detail-add'
@@ -25,6 +26,8 @@ export class InventoryItemsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => this.listID = params['id']);
+
     this.route.params.subscribe(params => {
       this.inventoryListItems = this._inventoryService.loadInventoryListItems(params['id']);
     });
