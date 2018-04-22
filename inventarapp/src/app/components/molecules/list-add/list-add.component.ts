@@ -11,7 +11,7 @@ import { InventoryService } from '../../../services/inventory.service';
 export class ListAddComponent implements OnInit {
   stateList = {
     state: 'save',
-    routerLink: '/inventory-items'
+    routerLink: '/inventory'
   };
   listName: string;
 

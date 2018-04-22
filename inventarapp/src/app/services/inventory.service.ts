@@ -75,4 +75,8 @@ export class InventoryService {
 
     this.db.object(path).remove();
   }
+
+  addInventoryList(listName: string) {
+    //TODO: LIST ADD
+  }
 }
