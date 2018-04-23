@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class InventoryItemsComponent implements OnInit {
   inventoryListItems: Observable<InventoryListItem[]>;
   routerLink: string;
+  componentName: string = "Listen Elemente";
   listID: string;
   stateList: any = {
     state: 'add',
