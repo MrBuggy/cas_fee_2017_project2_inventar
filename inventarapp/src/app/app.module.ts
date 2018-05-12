@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule, JsonpModule } from '@angular/http';
-import { Routes, RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 /* COMPONENTS */
@@ -24,30 +23,17 @@ import { NavigationService } from './services/navigation.service';
 import { InventoryService } from './services/inventory.service';
 import { StateService } from './services/state.service';
 
-// Route Configuration
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/profile', pathMatch: 'full' },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'inventory', component: InventoryComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'inventory-items/:id', component: InventoryItemsComponent },
-  { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent },
-  { path: 'inventory-item-detail-edit/:id/:listID', component: InventoryItemDetailEditComponent },
-  { path: 'inventory-item-detail-add/:listID', component: InventoryItemDetailAddComponent },
-  { path: 'list-add', component: ListAddComponent },
-  { path: 'search-detail/:id/:listID', component: SearchDetailComponent }
-];
-
-// Backend
+/* BACKEND */
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { firebaseConfig } from '../environments/firebase.config';
+import { environment } from '../environments/environment';
 import { ActionButtonComponent } from './components/atoms/action-button/action-button.component';
 import { IconComponent } from './components/atoms/icon/icon.component';
 import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -69,14 +55,10 @@ import { UserService } from './services/user.service';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-    JsonpModule,
     FormsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true }
-    ),
-    AngularFireModule.initializeApp(firebaseConfig),
+    HttpModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule
