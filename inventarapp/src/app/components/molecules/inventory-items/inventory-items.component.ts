@@ -4,6 +4,7 @@ import { InventoryListItem } from '../../../models/inventory-list-item';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { StateList } from '../../../models/state';
 
 @Component({
   selector: 'inventory-items',
@@ -13,9 +14,9 @@ import { Observable } from 'rxjs/Observable';
 export class InventoryItemsComponent implements OnInit {
   inventoryListItems: Observable<InventoryListItem[]>;
   routerLink: string;
-  componentName: string = "Listen Elemente";
+  componentName = 'Listen Elemente';
   listID: string;
-  stateList: any = {
+  stateList: StateList = {
     state: 'add',
     routerLink: ''
   };

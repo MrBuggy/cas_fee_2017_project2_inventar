@@ -1,4 +1,4 @@
-<button class="action-button" routerLink="{{stateList.routerLink}}" (click)="onBtnClick.emit()">
+<button class="action-button" routerLink="{{stateList.routerLink}}" (click)="btnClick.emit()">
   <i *ngIf="stateList.state == 'add'" class="fas fa-plus action-button__icon"></i>
   <i *ngIf="stateList.state == 'edit'" class="fas fa-pencil-alt action-button__icon"></i>
   <i *ngIf="stateList.state == 'save'" class="fas fa-check action-button__icon"></i>

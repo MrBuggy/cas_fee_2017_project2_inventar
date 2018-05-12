@@ -5,7 +5,6 @@ import { of } from 'rxjs/observable/of';
 
 import { InventoryList } from '../models/inventory-list';
 import { InventoryListItem } from '../models/inventory-list-item';
-import { INVENTORY_LIST_ITEMS } from '../models/inventory-list-items';
 
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { QueryFn } from 'angularfire2/database/interfaces';

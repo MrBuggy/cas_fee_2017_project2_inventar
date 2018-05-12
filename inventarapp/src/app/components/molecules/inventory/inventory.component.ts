@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryList } from '../../../models/inventory-list';
 import { Observable } from 'rxjs/Observable';
+import { StateList } from '../../../models/state';
 
 @Component({
   selector: 'inventory',
@@ -12,7 +13,7 @@ export class InventoryComponent {
   componentName = 'Listen';
   inventoryList: Observable<InventoryList[]>;
   routerLink = '/inventory-items';
-  stateList: Object = {
+  stateList: StateList = {
     state: 'add',
     routerLink: '/list-add'
   };

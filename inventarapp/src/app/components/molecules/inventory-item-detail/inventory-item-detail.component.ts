@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryListItem } from '../../../models/inventory-list-item';
 import { InventoryService } from '../../../services/inventory.service';
+import { StateList } from '../../../models/state';
 
 @Component({
   selector: 'inventory-item-detail',
@@ -13,7 +14,7 @@ export class InventoryItemDetailComponent implements OnInit {
   item: InventoryListItem;
   id: string;
   listID: string;
-  stateList = {
+  stateList: StateList = {
     state: 'edit',
     routerLink: ''
   };

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
+import { StateList } from '../../../models/state';
 
 @Component({
   selector: 'list-add',
@@ -9,7 +10,8 @@ import { InventoryService } from '../../../services/inventory.service';
   styleUrls: ['./list-add.component.scss']
 })
 export class ListAddComponent implements OnInit {
-  stateList = {
+  title = 'Hinzufügen';
+  stateList: StateList = {
     state: 'save',
     routerLink: '/inventory'
   };
@@ -36,5 +38,4 @@ export class ListAddComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
 }

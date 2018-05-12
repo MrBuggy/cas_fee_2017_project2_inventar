@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { StateList } from '../../../models/state';
 
 @Component({
   selector: 'action-button',
@@ -7,8 +8,8 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./action-button.component.scss']
 })
 export class ActionButtonComponent implements OnInit {
-  @Input() stateList: Object;
-  @Output() onBtnClick = new EventEmitter<undefined>();
+  @Input() stateList: StateList;
+  @Output() btnClick = new EventEmitter<undefined>();
 
   constructor() { }
 

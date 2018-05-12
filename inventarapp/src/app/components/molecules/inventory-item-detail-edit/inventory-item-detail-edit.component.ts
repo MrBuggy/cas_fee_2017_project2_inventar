@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { InventoryService } from "../../../services/inventory.service";
-import { InventoryListItem } from "../../../models/inventory-list-item";
+import { InventoryService } from '../../../services/inventory.service';
+import { InventoryListItem } from '../../../models/inventory-list-item';
+import { StateList } from '../../../models/state';
 
 @Component({
   selector: 'inventory-item-detail-edit',
@@ -14,7 +15,7 @@ export class InventoryItemDetailEditComponent implements OnInit {
   id: string;
   listID: string;
 
-  stateList = {
+  stateList: StateList = {
     state: 'save',
     routerLink: ''
   };
@@ -52,7 +53,6 @@ export class InventoryItemDetailEditComponent implements OnInit {
   }
 
   cancel() {
-    console.log('item edit cancel');
     this.goBack();
   }
 
