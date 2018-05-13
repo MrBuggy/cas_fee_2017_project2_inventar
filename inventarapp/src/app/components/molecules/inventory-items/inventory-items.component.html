@@ -1,4 +1,4 @@
-<main-header [title]="componentName" [hasBack]="true" (onBtnBack)="goBack()"></main-header>
+<main-header [title]="componentName" [hasBack]="true" (btnBack)="goBack()"></main-header>
 
 <div class="inventory-items">
   <div class="inventory-items__item" *ngFor="let item of inventoryListItems | async" [routerLink]="['/inventory-item-detail', item.$key, listID]">

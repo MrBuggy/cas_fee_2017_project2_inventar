@@ -1,6 +1,8 @@
 import { LendingItem } from './lending-item';
 
 export class LendingObject {
-  from: LendingItem[];
-  to: LendingItem[];
+  from: string;
+  to: string;
+  froms: LendingItem[];
+  tos: LendingItem[];
 }

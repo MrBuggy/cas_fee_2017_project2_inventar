@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { InventoryListItem } from "../../../models/inventory-list-item";
+import { InventoryListItem } from '../../../models/inventory-list-item';
 
 @Component({
   selector: 'list',

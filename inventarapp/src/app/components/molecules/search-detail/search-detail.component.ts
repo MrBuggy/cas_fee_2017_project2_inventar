@@ -16,7 +16,7 @@ export class SearchDetailComponent implements OnInit {
   listID: string;
   stateList: StateList = {
     state: 'like',
-    routerLink: ''
+    routerLink: '/search'
   };
 
   constructor(

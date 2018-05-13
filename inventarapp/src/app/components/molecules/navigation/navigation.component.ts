@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationService } from "../../../services/navigation.service";
-import { NavigationListModel } from "../../../models/navigation-list";
+import { NavigationService } from '../../../services/navigation.service';
+import { NavigationListModel } from '../../../models/navigation-list';
 
 @Component({
   selector: 'navigation',
