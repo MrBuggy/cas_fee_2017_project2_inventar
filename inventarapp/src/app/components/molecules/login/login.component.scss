@@ -1,0 +1,27 @@
+@import "../../../../assets/basics/css/variables.scss";
+
+.login, .register {
+  display: flex;
+  flex-direction: column;
+  padding: $space-20;
+  justify-content: center;
+  height: 100%;
+
+  &__field {
+    color: $ocean-blue;
+    border: 1px solid $ultralight-gray;
+    outline: none;
+    padding: $space-5;
+    margin-bottom: $space-20;
+  }
+
+  &__button {
+    border: none;
+    background-color: $heaven-blue;
+    color: white;
+    padding: $space-10 $space-5;
+    border-radius: $radius-3;
+    outline: none;
+    margin-top: $space-5;
+  }
+}

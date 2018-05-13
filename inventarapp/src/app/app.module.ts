@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* COMPONENTS */
 import { AppComponent } from './app.component';
@@ -17,11 +17,13 @@ import { InventoryItemDetailEditComponent } from './components/molecules/invento
 import { InventoryItemDetailAddComponent } from './components/molecules/inventory-item-detail-add/inventory-item-detail-add.component';
 import { ListAddComponent } from './components/molecules/list-add/list-add.component';
 import { SearchDetailComponent } from './components/molecules/search-detail/search-detail.component';
+import { LoginComponent } from './components/molecules/login/login.component';
 
 /* SERVICES */
 import { NavigationService } from './services/navigation.service';
 import { InventoryService } from './services/inventory.service';
 import { StateService } from './services/state.service';
+import { AuthService } from './services/auth.service';
 
 /* BACKEND */
 import { AngularFireModule } from 'angularfire2';
@@ -32,7 +34,6 @@ import { environment } from '../environments/environment';
 import { ActionButtonComponent } from './components/atoms/action-button/action-button.component';
 import { IconComponent } from './components/atoms/icon/icon.component';
 import { SearchService } from './services/search.service';
-import { UserService } from './services/user.service';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -51,11 +52,13 @@ import { AppRoutingModule } from './app-routing.module';
     InventoryItemDetailEditComponent,
     InventoryItemDetailAddComponent,
     ListAddComponent,
-    SearchDetailComponent
+    SearchDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -68,7 +71,7 @@ import { AppRoutingModule } from './app-routing.module';
     InventoryService,
     StateService,
     SearchService,
-    UserService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

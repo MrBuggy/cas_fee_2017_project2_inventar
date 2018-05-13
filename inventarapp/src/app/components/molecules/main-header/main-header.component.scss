@@ -59,4 +59,17 @@
     color: $light-gray;
     padding-left: $space-15;
   }
+
+
+  &__button {
+    border: none;
+    background-color: transparent;
+    color: black;
+    padding: $space-10 $space-5;
+    border-radius: $radius-3;
+    outline: none;
+    margin-top: $space-5;
+    margin-right: $space-10;
+  }
+
 }

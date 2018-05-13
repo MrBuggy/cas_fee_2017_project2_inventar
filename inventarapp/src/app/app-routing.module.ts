@@ -11,10 +11,13 @@ import { InventoryItemDetailEditComponent } from './components/molecules/invento
 import { InventoryItemDetailAddComponent } from './components/molecules/inventory-item-detail-add/inventory-item-detail-add.component';
 import { ListAddComponent } from './components/molecules/list-add/list-add.component';
 import { SearchDetailComponent } from './components/molecules/search-detail/search-detail.component';
+import { LoginComponent } from './components/molecules/login/login.component';
+import { AuthGuard } from './utilities/auth.guard';
 
 // Route Configuration
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/profile', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent },
   { path: 'inventory', component: InventoryComponent },
   { path: 'search', component: SearchComponent },
@@ -29,6 +32,6 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
-  providers: []
+  providers: [AuthGuard]
 })
 export class AppRoutingModule {}
