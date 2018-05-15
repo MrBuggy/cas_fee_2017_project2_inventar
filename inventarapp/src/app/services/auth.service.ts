@@ -9,12 +9,13 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { User } from '../models/user';
 import { of } from 'rxjs/observable/of';
 import { take } from 'rxjs/operators/take';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthService {
   public user: Observable<User>;
 
-  constructor(private fireAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
+  constructor(private fireAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router,  private toastr: ToastrService) {
     this.user = this.fireAuth.authState
       .switchMap((auth) => {
         if (auth) {
@@ -30,6 +31,7 @@ export class AuthService {
       user => {
         this.updateNewUser(user);
       }, (err) => {
+        this.toastr.error('Login fehlgeschlagen', 'Benutzername oder Passwort sind falsch!');
         throw err;
       }
     );
@@ -41,7 +43,7 @@ export class AuthService {
         this.updateNewUser(user);
         this.router.navigate(['/profile']);
       }, (err) => {
-        console.log(err);
+        this.toastr.error(err);
       });
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '../../../services/search.service';
 import { InventoryListItem } from '../../../models/inventory-list-item';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'search',
@@ -12,10 +13,14 @@ export class SearchComponent {
   searchResultList: InventoryListItem[];
   searchString: string;
 
-  constructor(private _searchService: SearchService) {
+  constructor(private _searchService: SearchService, private toastr: ToastrService) {
   }
 
   search() {
     this.searchResultList = this._searchService.loadSearchResults(this.searchString);
+
+    if(this.searchResultList.length == 0) {
+      // this.toastr.info('Keine Suchergebnisse gefunden!');
+    }
   }
 }

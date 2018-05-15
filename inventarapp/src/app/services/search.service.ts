@@ -9,6 +9,8 @@ import { InventoryList } from '../models/inventory-list';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { QueryFn } from 'angularfire2/database/interfaces';
 
+
+
 @Injectable()
 export class SearchService {
   private apiPath = '/inventoryList';
