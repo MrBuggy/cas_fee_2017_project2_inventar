@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryListItem } from '../../../models/inventory-list-item';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { StateList } from '../../../models/state';
 
@@ -24,7 +24,8 @@ export class InventoryItemsComponent implements OnInit {
   constructor(
     private _inventoryService: InventoryService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -38,5 +39,9 @@ export class InventoryItemsComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  redirect() {
+    this.router.navigate([`/inventory`]);
   }
 }
