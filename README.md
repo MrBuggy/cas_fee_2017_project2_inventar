@@ -24,6 +24,9 @@ App build and start
 
 Browse http://localhost:4200
 
+Live Demo App
+
+https://inventarmaterialtest.firebaseapp.com/
 
 # Projekt Idee
 Unsere Idee soll ein Prototyp für ein Projekt sein, welches vor einigen Monaten von Srdan
