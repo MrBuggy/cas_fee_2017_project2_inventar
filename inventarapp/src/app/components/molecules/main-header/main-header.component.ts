@@ -10,9 +10,11 @@ export class MainHeaderComponent implements OnInit {
   @Input() title: string;
   @Input() hasBack: boolean;
   @Input() hasCancel: boolean;
+  @Input() hasEdit: boolean;
 
   @Output() btnBack = new EventEmitter<undefined>();
   @Output() btnCancel = new EventEmitter<undefined>();
+  @Output() btnEdit = new EventEmitter<undefined>();
 
   constructor(private authService: AuthService) { }
 
@@ -22,5 +24,4 @@ export class MainHeaderComponent implements OnInit {
   logout() {
     this.authService.logoutUser();
   }
-
 }

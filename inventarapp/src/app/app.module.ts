@@ -20,6 +20,7 @@ import { InventoryItemDetailAddComponent } from './components/molecules/inventor
 import { ListAddComponent } from './components/molecules/list-add/list-add.component';
 import { SearchDetailComponent } from './components/molecules/search-detail/search-detail.component';
 import { LoginComponent } from './components/molecules/login/login.component';
+import { ActionButtonComponent } from './components/molecules/action-button/action-button.component';
 
 /* SERVICES */
 import { NavigationService } from './services/navigation.service';
@@ -33,10 +34,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
-import { ActionButtonComponent } from './components/atoms/action-button/action-button.component';
-import { IconComponent } from './components/atoms/icon/icon.component';
 import { SearchService } from './services/search.service';
 import { AppRoutingModule } from './app-routing.module';
+import { InventoryEditComponent } from './components/molecules/inventory-edit/inventory-edit.component';
 
 @NgModule({
   declarations: [
@@ -50,12 +50,12 @@ import { AppRoutingModule } from './app-routing.module';
     ListComponent,
     InventoryItemDetailComponent,
     ActionButtonComponent,
-    IconComponent,
     InventoryItemDetailEditComponent,
     InventoryItemDetailAddComponent,
     ListAddComponent,
     SearchDetailComponent,
-    LoginComponent
+    LoginComponent,
+    InventoryEditComponent
   ],
   imports: [
     BrowserModule,
