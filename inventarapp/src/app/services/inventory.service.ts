@@ -92,7 +92,15 @@ export class InventoryService {
     this.toastr.success('Liste erfolgreich hinzugefügt!');
   }
 
-  loadSingleInventoryList(listID: string)  {
-    return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).snapshotChanges();
+  loadSingleInventoryList(listID: string): Observable<InventoryList>   {
+    return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).valueChanges();
+  }
+
+  updateSingleInventoryList(listID: string, newName: string)  {
+    return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).update({ name: newName });
+  }
+
+  deleteSingleInventoryList(listID: string) {
+    return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).remove();
   }
 }

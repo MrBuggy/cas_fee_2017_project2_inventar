@@ -18,7 +18,7 @@ export class MainHeaderComponent implements OnInit {
   @Output() btnCancel = new EventEmitter<undefined>();
   @Output() btnEdit = new EventEmitter<undefined>();
 
-  constructor(private authService: AuthService, private route: ActivatedRoute,) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
 

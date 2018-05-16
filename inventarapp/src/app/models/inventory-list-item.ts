@@ -8,4 +8,5 @@ export class InventoryListItem {
   lending?: LendingObject;
   value?: number;
   photo?: string;
+  listID: string;
 }

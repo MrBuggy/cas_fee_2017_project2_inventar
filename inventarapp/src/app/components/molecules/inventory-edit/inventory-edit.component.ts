@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryList } from '../../../models/inventory-list';
 import { StateList } from '../../../models/state';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'inventory-edit',
@@ -22,23 +23,32 @@ export class InventoryEditComponent implements OnInit {
     private route: ActivatedRoute,
     private _inventoryService: InventoryService,
     private location: Location,
-    private router: Router
-  ) { }
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => this.listID = params['id']);
-    console.log(this.listID);
-
     this.loadList();
   }
 
   save() {
-    console.log('SAVE!');
-    // this.goBack();
+    this._inventoryService.updateSingleInventoryList(this.listID, this.list.name).then(() => {
+      this.toastr.success('Liste erfolgreich aktualisiert!');
+    }, (err) => {
+      this.toastr.error('Die Liste konnte nicht gespeichert werden.');
+    });
+    this.stateList.routerLink = `/inventory-list/${this.listID}`;
+    this.goBack();
   }
 
   delete() {
-    console.log('DELETE!');
+    this._inventoryService.deleteSingleInventoryList(this.listID).then(() => {
+      this.toastr.success('Liste erfolgreich gelöscht!');
+    }, (err) => {
+      this.toastr.error('Die Liste konnte nicht gelöscht werden.');
+    });
+    this.router.navigate([`/inventory`]);
   }
 
   cancel() {
@@ -49,9 +59,9 @@ export class InventoryEditComponent implements OnInit {
     this.location.back();
   }
 
-  loadList(): void {
+  loadList() {
     this._inventoryService.loadSingleInventoryList(this.listID).subscribe(list => {
-      this.list = list.payload.val();
+      this.list = list;
     });
   }
 }
