@@ -3,39 +3,4 @@
 .inventory-items {
   display: flex;
   flex-direction: column;
-
-	&__item {
-    padding: $space-15;
-    border-bottom: 1px solid $ultralight-gray;
-    position: relative;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 19px;
-      right: 15px;
-      background-image: url('../../../../assets/images/arrow-gray.png');
-      background-position: center;
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      width: 9px;
-      height: 14px;
-      transform: rotate(180deg);
-    }
-  }
-
-  &__item-title {
-    color: $ocean-blue;
-    font-size: 13px;
-  }
-
-  &__warning {
-    font-size: 20px;
-    color: $warning;
-    margin-right: $space-20;
-  }
 }

@@ -7,7 +7,7 @@ import { InventoryListItem } from '../../../models/inventory-list-item';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  @Input() items: InventoryListItem;
+  @Input() item: InventoryListItem;
   @Input() displayString: string;
   @Input() routerLink: string;
 
