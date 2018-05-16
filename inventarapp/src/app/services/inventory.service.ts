@@ -10,6 +10,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 import { QueryFn } from 'angularfire2/database/interfaces';
 
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class InventoryService {
@@ -17,13 +18,15 @@ export class InventoryService {
 
   inventoryListsRef: AngularFireList<InventoryList>;
 
-  constructor(private db: AngularFireDatabase, private toastr: ToastrService) {
+  constructor(private db: AngularFireDatabase, private toastr: ToastrService, private authService: AuthService) {
     this.inventoryListsRef = db.list(this.apiPath);
   }
 
-  loadInventoryList(): Observable<InventoryList[]> {
-    return this.inventoryListsRef.snapshotChanges().map((arr) => {
-      return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }));
+  loadInventoryList(): Promise<Observable<InventoryList[]>> {
+    return this.authService.getCurrentUser().then((user) => {
+      return this.db.list(this.apiPath, ref => ref.orderByChild('userID').equalTo(user.uid)).snapshotChanges().map((arr) => {
+        return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }));
+      });
     });
   }
 
@@ -48,17 +51,17 @@ export class InventoryService {
   }
 
   addInventoryItem(item: any, listID: string) {
-     const path = `${this.apiPath}/${listID}/items`;
+    const path = `${this.apiPath}/${listID}/items`;
 
-     this.db.list(path).push({
+    this.db.list(path).push({
       name: item.name,
       count: item.count,
       value: item.value,
       hasWarning: false,
       lending: {}
-     });
+    });
 
-     this.toastr.success('Element erfolgreich hinzugefügt!');
+    this.toastr.success('Element erfolgreich hinzugefügt!');
   }
 
   editInventoryItem(item: any, key: string, listID: string) {
@@ -83,20 +86,22 @@ export class InventoryService {
   }
 
   addInventoryList(listName: string) {
-    const list = new InventoryList();
-    list.name = listName;
-    list.hasWarning = false;
-    list.items = new Array<InventoryListItem>();
-
-    this.inventoryListsRef.push(list);
-    this.toastr.success('Liste erfolgreich hinzugefügt!');
+    this.authService.getCurrentUser().then((result) => {
+      const list = new InventoryList();
+      list.name = listName;
+      list.hasWarning = false;
+      list.userID = result.uid;
+      list.items = new Array<InventoryListItem>();
+      this.inventoryListsRef.push(list);
+      this.toastr.success('Liste erfolgreich hinzugefügt!');
+    });
   }
 
-  loadSingleInventoryList(listID: string): Observable<InventoryList>   {
+  loadSingleInventoryList(listID: string): Observable<InventoryList> {
     return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).valueChanges();
   }
 
-  updateSingleInventoryList(listID: string, newName: string)  {
+  updateSingleInventoryList(listID: string, newName: string) {
     return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).update({ name: newName });
   }
 

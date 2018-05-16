@@ -19,6 +19,8 @@ export class InventoryComponent {
   };
 
   constructor(private _inventoryService: InventoryService) {
-   this.inventoryList = this._inventoryService.loadInventoryList();
+    this._inventoryService.loadInventoryList().then(list => {
+      this.inventoryList = list;
+    });
   }
 }
