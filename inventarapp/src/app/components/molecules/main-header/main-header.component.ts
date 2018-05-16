@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'main-header',
@@ -10,13 +10,18 @@ export class MainHeaderComponent implements OnInit {
   @Input() title: string;
   @Input() hasBack: boolean;
   @Input() hasCancel: boolean;
+  @Input() hasEdit: boolean;
 
-  @Output() onBtnBack = new EventEmitter<undefined>();
-  @Output() onBtnCancel = new EventEmitter<undefined>();
+  @Output() btnBack = new EventEmitter<undefined>();
+  @Output() btnCancel = new EventEmitter<undefined>();
+  @Output() btnEdit = new EventEmitter<undefined>();
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.authService.logoutUser();
+  }
 }

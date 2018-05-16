@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule, JsonpModule } from '@angular/http';
-import { Routes, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 /* COMPONENTS */
 import { AppComponent } from './app.component';
@@ -18,36 +19,24 @@ import { InventoryItemDetailEditComponent } from './components/molecules/invento
 import { InventoryItemDetailAddComponent } from './components/molecules/inventory-item-detail-add/inventory-item-detail-add.component';
 import { ListAddComponent } from './components/molecules/list-add/list-add.component';
 import { SearchDetailComponent } from './components/molecules/search-detail/search-detail.component';
+import { LoginComponent } from './components/molecules/login/login.component';
+import { ActionButtonComponent } from './components/molecules/action-button/action-button.component';
 
 /* SERVICES */
 import { NavigationService } from './services/navigation.service';
 import { InventoryService } from './services/inventory.service';
 import { StateService } from './services/state.service';
+import { AuthService } from './services/auth.service';
 
-// Route Configuration
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/profile', pathMatch: 'full' },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'inventory', component: InventoryComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'inventory-items/:id', component: InventoryItemsComponent },
-  { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent },
-  { path: 'inventory-item-detail-edit/:id/:listID', component: InventoryItemDetailEditComponent },
-  { path: 'inventory-item-detail-add/:listID', component: InventoryItemDetailAddComponent },
-  { path: 'list-add', component: ListAddComponent },
-  { path: 'search-detail/:id/:listID', component: SearchDetailComponent }
-];
-
-// Backend
+/* BACKEND */
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { firebaseConfig } from '../environments/firebase.config';
-import { ActionButtonComponent } from './components/atoms/action-button/action-button.component';
-import { IconComponent } from './components/atoms/icon/icon.component';
+import { environment } from '../environments/environment';
 import { SearchService } from './services/search.service';
-import { UserService } from './services/user.service';
+import { AppRoutingModule } from './app-routing.module';
+import { InventoryEditComponent } from './components/molecules/inventory-edit/inventory-edit.component';
 
 @NgModule({
   declarations: [
@@ -61,32 +50,32 @@ import { UserService } from './services/user.service';
     ListComponent,
     InventoryItemDetailComponent,
     ActionButtonComponent,
-    IconComponent,
     InventoryItemDetailEditComponent,
     InventoryItemDetailAddComponent,
     ListAddComponent,
-    SearchDetailComponent
+    SearchDetailComponent,
+    LoginComponent,
+    InventoryEditComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-    JsonpModule,
     FormsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true }
-    ),
-    AngularFireModule.initializeApp(firebaseConfig),
+    ReactiveFormsModule,
+    HttpModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     NavigationService,
     InventoryService,
     StateService,
     SearchService,
-    UserService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -5,10 +5,11 @@ import { of } from 'rxjs/observable/of';
 
 import { InventoryList } from '../models/inventory-list';
 import { InventoryListItem } from '../models/inventory-list-item';
-import { INVENTORY_LIST_ITEMS } from '../models/inventory-list-items';
 
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { QueryFn } from 'angularfire2/database/interfaces';
+
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class InventoryService {
@@ -16,7 +17,7 @@ export class InventoryService {
 
   inventoryListsRef: AngularFireList<InventoryList>;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private toastr: ToastrService) {
     this.inventoryListsRef = db.list(this.apiPath);
   }
 
@@ -56,6 +57,8 @@ export class InventoryService {
       hasWarning: false,
       lending: {}
      });
+
+     this.toastr.success('Element erfolgreich hinzugefügt!');
   }
 
   editInventoryItem(item: any, key: string, listID: string) {
@@ -68,12 +71,15 @@ export class InventoryService {
       value: item.value,
       lending: item.lending || {}
     });
+
+    this.toastr.success('Element erfolgreich gespeichert!');
   }
 
   deleteInventoryItem(key: string, listID: string) {
     const path = `${this.apiPath}/${listID}/items/${key}`;
 
     this.db.object(path).remove();
+    this.toastr.success('Element erfolgreich gelöscht!');
   }
 
   addInventoryList(listName: string) {
@@ -83,5 +89,6 @@ export class InventoryService {
     list.items = new Array<InventoryListItem>();
 
     this.inventoryListsRef.push(list);
+    this.toastr.success('Liste erfolgreich hinzugefügt!');
   }
 }

@@ -1,0 +1,15 @@
+<main-header [title]="'Liste bearbeiten'" [hasCancel]="true" (btnCancel)="cancel()"></main-header>
+
+<div class="inventory-edit">
+  <div class="inventory-edit__wrapper">
+    <span class="inventory-edit__label">Name</span>
+    <input class="inventory-edit__data" type="text">
+    <!-- <input class="inventory-edit__data" [(ngModel)]="item.name" type="text" value="{{item.name}}"> -->
+  </div>
+
+  <div class="inventory-edit__wrapper">
+    <button class="inventory-edit__deleteBtn" (click)="delete()">L&ouml;schen</button>
+  </div>
+</div>
+
+<action-button [stateList]="stateList" (btnClick)="save()"></action-button>

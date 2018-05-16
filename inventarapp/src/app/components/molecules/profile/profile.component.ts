@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { UserService } from "../../../services/user.service";
-import { User } from "../../../models/user";
+import { StateList } from '../../../models/state';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'profile',
@@ -10,17 +10,17 @@ import { User } from "../../../models/user";
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  componentName: string = 'Profil';
-  userList: User[];
-  stateList = {
+  componentName = 'Profil';
+  username: string;
+  stateList: StateList = {
     state: 'edit',
     routerLink: ''
   };
 
   constructor(
     private route: ActivatedRoute,
-    private _userService: UserService,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -28,7 +28,10 @@ export class ProfileComponent implements OnInit {
   }
 
   loadUser(): void {
-    this._userService.getUser().subscribe(userList => this.userList = userList);
+    this.authService.getCurrentUser().then((user) => {
+      this.username = user.displayName || user.email;
+    }, (err) => {
+      console.log(err);
+    });
   }
-
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { InventoryListItem } from "../../../models/inventory-list-item";
+import { InventoryListItem } from '../../../models/inventory-list-item';
 
 @Component({
   selector: 'list',
@@ -7,7 +7,7 @@ import { InventoryListItem } from "../../../models/inventory-list-item";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  @Input() items: InventoryListItem;
+  @Input() item: InventoryListItem;
   @Input() displayString: string;
   @Input() routerLink: string;
 

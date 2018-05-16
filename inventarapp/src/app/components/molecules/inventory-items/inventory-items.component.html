@@ -1,9 +1,8 @@
-<main-header [title]="componentName" [hasBack]="true" (onBtnBack)="goBack()"></main-header>
+<main-header [title]="componentName" [hasBack]="true" [hasEdit]="true" (btnBack)="redirect()"></main-header>
 
 <div class="inventory-items">
-  <div class="inventory-items__item" *ngFor="let item of inventoryListItems | async" [routerLink]="['/inventory-item-detail', item.$key, listID]">
-    <span class="inventory-items__item-title">{{item.name}} | {{item.count}}</span>
-    <i *ngIf="item.hasWarning" class="fas fa-exclamation-triangle inventory-items__warning" title="Abweichungen im Inventar"></i>
+  <div *ngFor="let item of inventoryListItems | async" [routerLink]="['/inventory-item-detail', item.$key, listID]">
+    <list [item]="item" [displayString]="item.name + ' | ' + item.count"></list>
   </div>
 </div>
 

@@ -8,7 +8,7 @@ export class StateService {
   constructor() { }
 
   getState(component: string) {
-    if (component == 'inventory') {
+    if (component === 'inventory') {
       this.stateList.state = 'add';
       this.stateList.routerLink = '/inventory-list-add';
     }

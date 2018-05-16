@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryListItem } from '../../../models/inventory-list-item';
+import { StateList } from '../../../models/state';
 
 @Component({
   selector: 'inventory-item-detail-add',
@@ -10,14 +11,14 @@ import { InventoryListItem } from '../../../models/inventory-list-item';
   styleUrls: ['./inventory-item-detail-add.component.scss']
 })
 export class InventoryItemDetailAddComponent implements OnInit {
-  // item: InventoryListItem;
+  title = 'Hinzufügen';
   item: any = {
     id: -1,
     name: '',
     count: 0,
     hasWarning: false
   };
-  stateList = {
+  stateList: StateList = {
     state: 'save',
     routerLink: '/inventory-items'
   };
@@ -34,19 +35,15 @@ export class InventoryItemDetailAddComponent implements OnInit {
   }
 
   save() {
-    // TODO Get ListID
-    console.log('save');
     this._inventoryService.addInventoryItem(this.item, this.listID);
     this.goBack();
   }
 
   cancel() {
-    console.log('item edit cancel');
     this.goBack();
   }
 
   goBack(): void {
     this.location.back();
   }
-
 }

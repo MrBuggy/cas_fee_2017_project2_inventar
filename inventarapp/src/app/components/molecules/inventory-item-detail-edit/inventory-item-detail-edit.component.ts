@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { InventoryService } from "../../../services/inventory.service";
-import { InventoryListItem } from "../../../models/inventory-list-item";
+import { InventoryService } from '../../../services/inventory.service';
+import { InventoryListItem } from '../../../models/inventory-list-item';
+import { StateList } from '../../../models/state';
 
 @Component({
   selector: 'inventory-item-detail-edit',
@@ -14,7 +15,7 @@ export class InventoryItemDetailEditComponent implements OnInit {
   id: string;
   listID: string;
 
-  stateList = {
+  stateList: StateList = {
     state: 'save',
     routerLink: ''
   };
@@ -22,7 +23,8 @@ export class InventoryItemDetailEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _inventoryService: InventoryService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {
     this.item = new InventoryListItem();
   }
@@ -47,12 +49,10 @@ export class InventoryItemDetailEditComponent implements OnInit {
 
   delete() {
     this._inventoryService.deleteInventoryItem(this.id, this.listID);
-    this.stateList.routerLink = `/inventory-items/${this.listID}`;
-    this.goBack();
+    this.router.navigate([`/inventory-items/${this.listID}`]);
   }
 
   cancel() {
-    console.log('item edit cancel');
     this.goBack();
   }
 

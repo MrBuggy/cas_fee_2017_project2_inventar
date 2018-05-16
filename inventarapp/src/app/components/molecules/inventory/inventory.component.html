@@ -1,9 +1,8 @@
 <main-header [title]="componentName"></main-header>
 
 <div class="inventory">
-	<div class="inventory__item" *ngFor="let item of inventoryList | async" routerLink="/inventory-items/{{item.$key}}">
-    <span class="inventory__item-title">{{item.name}}</span>
-    <i *ngIf="item.hasWarning" class="fas fa-exclamation-triangle inventory__warning" title="Abweichungen im Inventar"></i>
+	<div *ngFor="let item of inventoryList | async" routerLink="/inventory-items/{{item.$key}}">
+    <list [item]="item" [displayString]="item.name"></list>
   </div>
 </div>
 
