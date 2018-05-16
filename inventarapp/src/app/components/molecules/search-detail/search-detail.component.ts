@@ -37,7 +37,10 @@ export class SearchDetailComponent implements OnInit {
   }
 
   likeItem() {
-    console.log('LIKE THIS ONE!');
+    this._inventoryService.rateItem(this.id, this.listID);
+
+    // Todo: navigation
+    this.stateList.routerLink = `/search-details/${this.id}/${this.listID}`;
   }
 
   goBack(): void {

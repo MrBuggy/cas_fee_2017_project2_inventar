@@ -9,4 +9,5 @@ export class InventoryListItem {
   value?: number;
   photo?: string;
   listID: string;
+  rating?: number;
 }

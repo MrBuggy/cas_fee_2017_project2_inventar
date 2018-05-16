@@ -11,6 +11,7 @@ import { QueryFn } from 'angularfire2/database/interfaces';
 
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
+import { take } from 'rxjs/operators/take';
 
 @Injectable()
 export class InventoryService {
@@ -50,7 +51,7 @@ export class InventoryService {
     return this.db.object(path).valueChanges() as Observable<InventoryListItem>;
   }
 
-  addInventoryItem(item: any, listID: string) {
+  addInventoryItem(item: InventoryListItem, listID: string) {
     const path = `${this.apiPath}/${listID}/items`;
 
     this.db.list(path).push({
@@ -58,13 +59,14 @@ export class InventoryService {
       count: item.count,
       value: item.value,
       hasWarning: false,
+      rating: 0,
       lending: {}
     });
 
     this.toastr.success('Element erfolgreich hinzugefügt!');
   }
 
-  editInventoryItem(item: any, key: string, listID: string) {
+  editInventoryItem(item: InventoryListItem, key: string, listID: string) {
     const path = `${this.apiPath}/${listID}/items/${key}`;
 
     this.db.object(path).update({
@@ -94,6 +96,15 @@ export class InventoryService {
       list.items = new Array<InventoryListItem>();
       this.inventoryListsRef.push(list);
       this.toastr.success('Liste erfolgreich hinzugefügt!');
+    });
+  }
+
+  rateItem(key: string, listID: string) {
+    const path = `${this.apiPath}/${listID}/items/${key}`;
+    const item = this.db.object<InventoryListItem>(path);
+
+    item.valueChanges().pipe(take(1)).subscribe(data => {
+      item.update({ rating: data.rating + 1 });
     });
   }
 
