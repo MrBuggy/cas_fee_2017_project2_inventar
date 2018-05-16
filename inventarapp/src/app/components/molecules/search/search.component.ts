@@ -19,8 +19,8 @@ export class SearchComponent {
   search() {
     this.searchResultList = this._searchService.loadSearchResults(this.searchString);
 
-    if(this.searchResultList.length == 0) {
-      // this.toastr.info('Keine Suchergebnisse gefunden!');
+    if (this.searchResultList.length == 0) {
+      this.toastr.info('Keine Suchergebnisse gefunden!');
     }
   }
 }

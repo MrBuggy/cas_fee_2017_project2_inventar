@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
-import { InventoryListItem } from '../../../models/inventory-list-item';
+import { InventoryList } from '../../../models/inventory-list';
 import { StateList } from '../../../models/state';
 
 @Component({
@@ -15,6 +15,8 @@ export class InventoryEditComponent implements OnInit {
     state: 'save',
     routerLink: ''
   };
+  listID: string;
+  list: InventoryList;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +26,10 @@ export class InventoryEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => this.listID = params['id']);
+    console.log(this.listID);
+
+    this.loadList();
   }
 
   save() {
@@ -41,5 +47,11 @@ export class InventoryEditComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  loadList(): void {
+    this._inventoryService.loadSingleInventoryList(this.listID).subscribe(list => {
+      this.list = list.payload.val();
+    });
   }
 }

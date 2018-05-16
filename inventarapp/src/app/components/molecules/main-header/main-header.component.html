@@ -3,7 +3,7 @@
     <i *ngIf="hasBack" class="fas fa-angle-left main-header__icon" title="" (click)="btnBack.emit()"></i>
     <i *ngIf="hasCancel" class="fas fa-times main-header__icon" title="" (click)="btnCancel.emit()"></i>
     <span class="main-header__title">{{title ? title: 'This is a title'}}</span>
-    <i *ngIf="hasEdit" class="fas fa-pencil-alt main-header__icon main-header__icon--edit" routerLink="/inventory-edit"></i>
+    <i *ngIf="hasEdit" class="fas fa-pencil-alt main-header__icon main-header__icon--edit" routerLink="{{listEditRoute}}"></i>
     <!-- <i *ngIf="hasEdit" class="fas fa-pencil-alt main-header__icon" routerLink="/inventory-items/{{list.$key}}"></i> -->
   </div>
   <div class="main-header__right">

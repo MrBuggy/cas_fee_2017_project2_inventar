@@ -16,6 +16,7 @@ export class InventoryItemsComponent implements OnInit {
   routerLink: string;
   componentName = 'Listen Elemente';
   listID: string;
+  listEditRoute: string;
   stateList: StateList = {
     state: 'add',
     routerLink: ''
@@ -31,6 +32,7 @@ export class InventoryItemsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => this.listID = params['id']);
     this.stateList.routerLink = `/inventory-item-detail-add/${this.listID}`;
+    this.listEditRoute = `/inventory-edit/${this.listID}`;
 
     this.route.params.subscribe(params => {
       this.inventoryListItems = this._inventoryService.loadInventoryListItems(params['id']);

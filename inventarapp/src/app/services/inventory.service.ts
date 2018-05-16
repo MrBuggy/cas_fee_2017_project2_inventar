@@ -91,4 +91,8 @@ export class InventoryService {
     this.inventoryListsRef.push(list);
     this.toastr.success('Liste erfolgreich hinzugefügt!');
   }
+
+  loadSingleInventoryList(listID: string)  {
+    return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).snapshotChanges();
+  }
 }

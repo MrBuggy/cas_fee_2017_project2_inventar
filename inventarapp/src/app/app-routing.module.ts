@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   { path: 'inventory-item-detail-add/:listID', component: InventoryItemDetailAddComponent },
   { path: 'list-add', component: ListAddComponent },
   { path: 'search-detail/:id/:listID', component: SearchDetailComponent },
-  { path: 'inventory-edit', component: InventoryEditComponent }
+  { path: 'inventory-edit/:id', component: InventoryEditComponent }
 ];
 
 @NgModule({
