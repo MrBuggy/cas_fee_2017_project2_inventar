@@ -10,4 +10,6 @@ export class InventoryListItem {
   photo?: string;
   listID: string;
   rating?: number;
+  userID: string;
+  userRated?: Array<string>;
 }

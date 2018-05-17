@@ -1,37 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { StateList } from '../../../models/state';
-import { AuthService } from '../../../services/auth.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Location } from "@angular/common";
+import { StateList } from "../../../models/state";
+import { AngularFireAuth } from "angularfire2/auth";
+import * as firebase from "firebase/app";
+import { take } from "rxjs/operators/take";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
-  selector: 'profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: "profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"]
 })
 export class ProfileComponent implements OnInit {
-  componentName = 'Profil';
-  username: string;
+  private authState: firebase.User;
+  componentName = "Profil";
+  email: string;
+  displayName: string;
   stateList: StateList = {
-    state: 'edit',
-    routerLink: ''
+    state: "edit",
+    routerLink: "/profile-edit"
   };
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
+    private fireAuth: AngularFireAuth,
     private authService: AuthService
-  ) { }
-
-  ngOnInit() {
-    this.loadUser();
-  }
-
-  loadUser(): void {
-    this.authService.getCurrentUser().then((user) => {
-      this.username = user.displayName || user.email;
-    }, (err) => {
-      console.log(err);
+  ) {
+    this.authService.loadCurrentUserProfile()
+    .subscribe(authState => {
+      this.authState = authState;
     });
   }
+
+  ngOnInit() {}
 }

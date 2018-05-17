@@ -14,6 +14,7 @@ import { SearchDetailComponent } from './components/molecules/search-detail/sear
 import { LoginComponent } from './components/molecules/login/login.component';
 import { AuthGuard } from './utilities/auth.guard';
 import { InventoryEditComponent } from './components/molecules/inventory-edit/inventory-edit.component';
+import { ProfileEditComponent } from './components/molecules/profile-edit/profile-edit.component';
 
 // Route Configuration
 const appRoutes: Routes = [
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
   { path: 'inventory-item-detail-add/:listID', component: InventoryItemDetailAddComponent },
   { path: 'list-add', component: ListAddComponent },
   { path: 'search-detail/:id/:listID', component: SearchDetailComponent },
-  { path: 'inventory-edit/:id', component: InventoryEditComponent }
+  { path: 'inventory-edit/:id', component: InventoryEditComponent },
+  { path: 'profile-edit', component: ProfileEditComponent }
 ];
 
 @NgModule({

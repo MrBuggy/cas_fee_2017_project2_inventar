@@ -17,6 +17,10 @@
     <span class="search-detail__label">Gesamtwert in CHF</span>
     <span class="search-detail__data">{{item.count * item.value}}</span>
   </div>
+  <div class="search-detail__wrapper">
+    <span class="search-detail__label">Likes {{hasLiked ? ' - Dir gefällt das!': ''}}</span>
+    <span class="search-detail__data">{{item.rating}}</span>
+  </div>
 </div>
 
-<action-button [stateList]="stateList" (btnClick)="likeItem()"></action-button>
+<action-button [ngClass]="hasLiked? 'search-detail__button--disabled': ''" [stateList]="stateList" (btnClick)="likeItem()"></action-button>

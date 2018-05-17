@@ -27,7 +27,10 @@ export class InventoryService {
     return this.authService.getCurrentUser().then((user) => {
       return this.db.list(this.apiPath, ref => ref.orderByChild('userID').equalTo(user.uid)).snapshotChanges().map((arr) => {
         return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }));
-      });
+      }, err => {
+        console.log(err);
+      }
+    );
     });
   }
 
@@ -53,17 +56,21 @@ export class InventoryService {
 
   addInventoryItem(item: InventoryListItem, listID: string) {
     const path = `${this.apiPath}/${listID}/items`;
-
-    this.db.list(path).push({
-      name: item.name,
-      count: item.count,
-      value: item.value,
-      hasWarning: false,
-      rating: 0,
-      lending: {}
-    });
-
-    this.toastr.success('Element erfolgreich hinzugefügt!');
+    this.authService.getCurrentUser().then(user => {
+      this.db.list(path).push({
+        name: item.name,
+        count: item.count,
+        value: item.value,
+        hasWarning: false,
+        userID: user.uid,
+        userRated: [],
+        rating: 0,
+        lending: {}
+      });
+      this.toastr.success('Element erfolgreich hinzugefügt!');
+  }, err => {
+    console.log(err);
+  });
   }
 
   editInventoryItem(item: InventoryListItem, key: string, listID: string) {
@@ -96,16 +103,26 @@ export class InventoryService {
       list.items = new Array<InventoryListItem>();
       this.inventoryListsRef.push(list);
       this.toastr.success('Liste erfolgreich hinzugefügt!');
+    }, err => {
+      console.log(err);
     });
   }
 
   rateItem(key: string, listID: string) {
     const path = `${this.apiPath}/${listID}/items/${key}`;
     const item = this.db.object<InventoryListItem>(path);
+    this.authService.getCurrentUser().then((user) => {
+      item.valueChanges().pipe(take(1)).subscribe(data => {
+        if(data.userRated == undefined){
+          data.userRated = [];
+        }
 
-    item.valueChanges().pipe(take(1)).subscribe(data => {
-      item.update({ rating: data.rating + 1 });
-    });
+        data.userRated.push(user.uid);
+        item.update({ rating: data.rating + 1, userRated: data.userRated });
+      });
+    }, err => {
+      console.log(err);
+  });
   }
 
   loadSingleInventoryList(listID: string): Observable<InventoryList> {
