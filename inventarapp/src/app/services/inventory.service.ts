@@ -65,7 +65,9 @@ export class InventoryService {
         userID: user.uid,
         userRated: [],
         rating: 0,
-        lending: {}
+        lending: {},
+        userMail: user.email,
+        userName: user.displayName
       });
       this.toastr.success('Element erfolgreich hinzugefügt!');
     }, err => {
@@ -100,8 +102,6 @@ export class InventoryService {
       list.name = listName;
       list.hasWarning = false;
       list.userID = result.uid;
-      list.userMail = result.email;
-      list.userName = result.displayName;
       list.items = new Array<InventoryListItem>();
       this.inventoryListsRef.push(list);
       this.toastr.success('Liste erfolgreich hinzugefügt!');

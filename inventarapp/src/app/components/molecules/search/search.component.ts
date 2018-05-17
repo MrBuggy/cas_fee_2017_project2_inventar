@@ -23,6 +23,6 @@ export class SearchComponent {
       if (this.searchResultList.length === 0) {
         this.toastr.info('Keine Suchergebnisse gefunden!');
       }
-    }, 500);
+    }, 1000);
   }
 }

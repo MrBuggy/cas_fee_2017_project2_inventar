@@ -10,6 +10,11 @@
     <span class="search-detail__data">{{item.name}}</span>
   </div>
   <div class="search-detail__wrapper">
+    <span class="search-detail__label">Erstellt durch</span>
+    <span class="search-detail__data">{{item.userName ? item.userName : ''}}</span>
+    <a href="mailto:{{item.userMail}}">{{item.userMail}}</a>
+  </div>
+  <div class="search-detail__wrapper">
     <span class="search-detail__label">Anzahl</span>
     <span class="search-detail__data">{{item.count}}</span>
   </div>

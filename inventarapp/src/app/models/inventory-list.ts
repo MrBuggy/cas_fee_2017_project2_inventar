@@ -6,6 +6,4 @@ export class InventoryList {
   hasWarning: boolean;
   items?: InventoryListItem[];
   userID: string;
-  userMail?: string;
-  userName?: string;
 }
