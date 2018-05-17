@@ -92,7 +92,6 @@ export class AuthService {
 
   logoutUser() {
     this.fireAuth.auth.signOut();
-    console.log("User logged out");
     this.router.navigate(["/login"]);
   }
 
