@@ -10,6 +10,8 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 import { QueryFn } from 'angularfire2/database/interfaces';
 
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './auth.service';
+import { take } from 'rxjs/operators/take';
 
 @Injectable()
 export class InventoryService {
@@ -17,13 +19,18 @@ export class InventoryService {
 
   inventoryListsRef: AngularFireList<InventoryList>;
 
-  constructor(private db: AngularFireDatabase, private toastr: ToastrService) {
+  constructor(private db: AngularFireDatabase, private toastr: ToastrService, private authService: AuthService) {
     this.inventoryListsRef = db.list(this.apiPath);
   }
 
-  loadInventoryList(): Observable<InventoryList[]> {
-    return this.inventoryListsRef.snapshotChanges().map((arr) => {
-      return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }));
+  loadInventoryList(): Promise<Observable<InventoryList[]>> {
+    return this.authService.getCurrentUser().then((user) => {
+      return this.db.list(this.apiPath, ref => ref.orderByChild('userID').equalTo(user.uid)).snapshotChanges().map((arr) => {
+        return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }));
+      }, err => {
+        console.log(err);
+      }
+    );
     });
   }
 
@@ -47,21 +54,26 @@ export class InventoryService {
     return this.db.object(path).valueChanges() as Observable<InventoryListItem>;
   }
 
-  addInventoryItem(item: any, listID: string) {
-     const path = `${this.apiPath}/${listID}/items`;
-
-     this.db.list(path).push({
-      name: item.name,
-      count: item.count,
-      value: item.value,
-      hasWarning: false,
-      lending: {}
-     });
-
-     this.toastr.success('Element erfolgreich hinzugefügt!');
+  addInventoryItem(item: InventoryListItem, listID: string) {
+    const path = `${this.apiPath}/${listID}/items`;
+    this.authService.getCurrentUser().then(user => {
+      this.db.list(path).push({
+        name: item.name,
+        count: item.count,
+        value: item.value,
+        hasWarning: false,
+        userID: user.uid,
+        userRated: [],
+        rating: 0,
+        lending: {}
+      });
+      this.toastr.success('Element erfolgreich hinzugefügt!');
+  }, err => {
+    console.log(err);
+  });
   }
 
-  editInventoryItem(item: any, key: string, listID: string) {
+  editInventoryItem(item: InventoryListItem, key: string, listID: string) {
     const path = `${this.apiPath}/${listID}/items/${key}`;
 
     this.db.object(path).update({
@@ -83,12 +95,45 @@ export class InventoryService {
   }
 
   addInventoryList(listName: string) {
-    const list = new InventoryList();
-    list.name = listName;
-    list.hasWarning = false;
-    list.items = new Array<InventoryListItem>();
+    this.authService.getCurrentUser().then((result) => {
+      const list = new InventoryList();
+      list.name = listName;
+      list.hasWarning = false;
+      list.userID = result.uid;
+      list.items = new Array<InventoryListItem>();
+      this.inventoryListsRef.push(list);
+      this.toastr.success('Liste erfolgreich hinzugefügt!');
+    }, err => {
+      console.log(err);
+    });
+  }
 
-    this.inventoryListsRef.push(list);
-    this.toastr.success('Liste erfolgreich hinzugefügt!');
+  rateItem(key: string, listID: string) {
+    const path = `${this.apiPath}/${listID}/items/${key}`;
+    const item = this.db.object<InventoryListItem>(path);
+    this.authService.getCurrentUser().then((user) => {
+      item.valueChanges().pipe(take(1)).subscribe(data => {
+        if(data.userRated == undefined){
+          data.userRated = [];
+        }
+
+        data.userRated.push(user.uid);
+        item.update({ rating: data.rating + 1, userRated: data.userRated });
+      });
+    }, err => {
+      console.log(err);
+  });
+  }
+
+  loadSingleInventoryList(listID: string): Observable<InventoryList> {
+    return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).valueChanges();
+  }
+
+  updateSingleInventoryList(listID: string, newName: string) {
+    return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).update({ name: newName });
+  }
+
+  deleteSingleInventoryList(listID: string) {
+    return this.db.object<InventoryList>(`${this.apiPath}/${listID}`).remove();
   }
 }

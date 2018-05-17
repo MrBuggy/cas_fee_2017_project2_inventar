@@ -20,7 +20,7 @@ export class InventoryItemDetailAddComponent implements OnInit {
   };
   stateList: StateList = {
     state: 'save',
-    routerLink: '/inventory-items'
+    routerLink: ''
   };
   listID: string;
 
@@ -36,6 +36,7 @@ export class InventoryItemDetailAddComponent implements OnInit {
 
   save() {
     this._inventoryService.addInventoryItem(this.item, this.listID);
+    this.stateList.routerLink = `/inventory-items/${this.listID}`;
     this.goBack();
   }
 

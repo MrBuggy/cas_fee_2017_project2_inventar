@@ -21,6 +21,7 @@ import { ListAddComponent } from './components/molecules/list-add/list-add.compo
 import { SearchDetailComponent } from './components/molecules/search-detail/search-detail.component';
 import { LoginComponent } from './components/molecules/login/login.component';
 import { ActionButtonComponent } from './components/molecules/action-button/action-button.component';
+import { ProfileEditComponent } from './components/molecules/profile-edit/profile-edit.component';
 
 /* SERVICES */
 import { NavigationService } from './services/navigation.service';
@@ -55,7 +56,8 @@ import { InventoryEditComponent } from './components/molecules/inventory-edit/in
     ListAddComponent,
     SearchDetailComponent,
     LoginComponent,
-    InventoryEditComponent
+    InventoryEditComponent,
+    ProfileEditComponent
   ],
   imports: [
     BrowserModule,

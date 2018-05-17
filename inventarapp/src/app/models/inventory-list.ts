@@ -5,4 +5,5 @@ export class InventoryList {
   name: string;
   hasWarning: boolean;
   items: InventoryListItem[];
+  userID: string;
 }

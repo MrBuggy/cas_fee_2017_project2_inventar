@@ -1,8 +1,8 @@
-<main-header [title]="componentName" [hasBack]="true" [hasEdit]="true" (btnBack)="redirect()"></main-header>
+<main-header [title]="componentName" [hasBack]="true" [hasEdit]="true" (btnBack)="redirect()" [listEditRoute]="listEditRoute"></main-header>
 
 <div class="inventory-items">
   <div *ngFor="let item of inventoryListItems | async" [routerLink]="['/inventory-item-detail', item.$key, listID]">
-    <list [item]="item" [displayString]="item.name + ' | ' + item.count"></list>
+    <list [item]="item" [displayString]="item.name + ' | ' + item.count + ' | ' + item.rating + ' Likes '"></list>
   </div>
 </div>
 

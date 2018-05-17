@@ -1,6 +1,5 @@
 export class User {
   uid?: string;
-  firstName?: string;
   displayName?: string;
   password?: string;
   photoURL?: string;

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'main-header',
@@ -11,14 +12,16 @@ export class MainHeaderComponent implements OnInit {
   @Input() hasBack: boolean;
   @Input() hasCancel: boolean;
   @Input() hasEdit: boolean;
+  @Input() listEditRoute: string;
 
   @Output() btnBack = new EventEmitter<undefined>();
   @Output() btnCancel = new EventEmitter<undefined>();
   @Output() btnEdit = new EventEmitter<undefined>();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
   }
 
   logout() {
