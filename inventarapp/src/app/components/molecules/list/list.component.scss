@@ -59,3 +59,15 @@
   }
 }
 
+@media (min-width: $bp-l) {
+  .list {
+    &__item {
+      &:hover {
+        background-color: lighten($ultralight-gray, 12);
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+      }
+    }
+  }
+}
+

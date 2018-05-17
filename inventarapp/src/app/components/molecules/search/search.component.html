@@ -11,6 +11,6 @@
 
 <div class="search__result">
   <div *ngFor="let item of searchResultList" [routerLink]="['/search-detail', item.$key, item.listID]">
-    <list [item]="item" [displayString]="item.name + ' | ' + item.count + ' | ' + item.rating + ' Likes '"></list>
+    <list [item]="item" [displayString]="item.name + ' | ' + item.count + ' | ' + item.rating + ' Likes '" [rating]="item.rating"></list>
   </div>
 </div>
