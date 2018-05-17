@@ -28,9 +28,9 @@ export class InventoryService {
       return this.db.list(this.apiPath, ref => ref.orderByChild('userID').equalTo(user.uid)).snapshotChanges().map((arr) => {
         return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }));
       }, err => {
-        console.log(err);
+        this.toastr.error('Liste konnte nicht geladen werden!');
       }
-    );
+      );
     });
   }
 
@@ -65,12 +65,14 @@ export class InventoryService {
         userID: user.uid,
         userRated: [],
         rating: 0,
-        lending: {}
+        lending: {},
+        userMail: user.email,
+        userName: user.displayName
       });
       this.toastr.success('Element erfolgreich hinzugefügt!');
-  }, err => {
-    console.log(err);
-  });
+    }, err => {
+      console.log(err);
+    });
   }
 
   editInventoryItem(item: InventoryListItem, key: string, listID: string) {
@@ -104,7 +106,7 @@ export class InventoryService {
       this.inventoryListsRef.push(list);
       this.toastr.success('Liste erfolgreich hinzugefügt!');
     }, err => {
-      console.log(err);
+      this.toastr.error('Liste konnte nicht erstellt werden!');
     });
   }
 
@@ -113,7 +115,7 @@ export class InventoryService {
     const item = this.db.object<InventoryListItem>(path);
     this.authService.getCurrentUser().then((user) => {
       item.valueChanges().pipe(take(1)).subscribe(data => {
-        if(data.userRated == undefined){
+        if (data.userRated === undefined) {
           data.userRated = [];
         }
 
@@ -121,8 +123,8 @@ export class InventoryService {
         item.update({ rating: data.rating + 1, userRated: data.userRated });
       });
     }, err => {
-      console.log(err);
-  });
+      this.toastr.error('Item konnte nicht bewertet werden!');
+    });
   }
 
   loadSingleInventoryList(listID: string): Observable<InventoryList> {

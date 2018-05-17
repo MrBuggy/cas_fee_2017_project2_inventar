@@ -2,7 +2,7 @@
 
 <div class="inventory-items">
   <div *ngFor="let item of inventoryListItems | async" [routerLink]="['/inventory-item-detail', item.$key, listID]">
-    <list [item]="item" [displayString]="item.name + ' | ' + item.count + ' | ' + item.rating + ' Likes '"></list>
+    <list [item]="item" [displayString]="item.name + ' | ' + item.count + ' | ' + item.rating + ' Likes '" [rating]="item.rating"></list>
   </div>
 </div>
 

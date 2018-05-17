@@ -9,8 +9,7 @@ import { InventoryList } from '../models/inventory-list';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { QueryFn } from 'angularfire2/database/interfaces';
 import { AuthService } from './auth.service';
-
-
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class SearchService {
@@ -19,7 +18,10 @@ export class SearchService {
   inventoryListsRef: AngularFireList<InventoryList>;
   searchResults: InventoryListItem[];
 
-  constructor(private db: AngularFireDatabase, private authService: AuthService) {
+  constructor(
+    private db: AngularFireDatabase,
+    private authService: AuthService,
+    private toastr: ToastrService) {
     this.inventoryListsRef = db.list(this.apiPath);
   }
 
@@ -42,7 +44,7 @@ export class SearchService {
         });
       });
     }, err => {
-      console.log(err);
+      this.toastr.error('Suche konnte nicht ausgeführt werden!');
     });
 
     return this.searchResults;

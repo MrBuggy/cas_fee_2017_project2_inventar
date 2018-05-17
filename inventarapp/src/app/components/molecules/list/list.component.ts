@@ -10,6 +10,7 @@ export class ListComponent implements OnInit {
   @Input() item: InventoryListItem;
   @Input() displayString: string;
   @Input() routerLink: string;
+  @Input() rating: number;
 
   constructor() { }
 

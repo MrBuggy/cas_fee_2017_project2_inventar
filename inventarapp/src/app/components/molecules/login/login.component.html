@@ -1,32 +1,25 @@
-<!-- TODO styling -->
-<h2>Login</h2>
-
-<form [formGroup]="loginForm" (ngSubmit)="loginWithMail()">
-  <div class="login">
-    <input class="login__field" type="email" placeholder="E-Mail" formControlName="loginEmail" required>
-
-    <!-- TODO validation message -->
-    <div *ngIf="!loginForm.get('loginEmail').valid && loginForm.get('loginEmail').touched">
-      Please enter a valid email adress.
+<div class="login__wrapper">
+  <h2 class="login__title">Anmelden</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="loginWithMail()">
+    <div class="login">
+      <div class="login__validEmailMsg" *ngIf="!loginForm.get('loginEmail').valid && loginForm.get('loginEmail').touched">
+        Diese E-Mail ist ung&uuml;ltig!
+      </div>
+      <input class="login__field" type="email" placeholder="E-Mail" formControlName="loginEmail" required>
+      <input class="login__field" type="password" placeholder="Passwort" formControlName="loginPassword" required>
+      <button class="login__button" type="submit" [disabled]="!loginForm.valid">Anmelden</button>
     </div>
+  </form>
+  <button class="register__toggleWrapper" (click)="toggleWrapper = !toggleWrapper">Ich habe noch keinen Account</button>
+</div>
 
-    <input class="login__field" type="password" placeholder="Passwort" formControlName="loginPassword" required>
-
-    <div *ngIf="!loginForm.get('loginPassword').valid && loginForm.get('loginPassword').touched">
-      Please enter a valid password.
+<div *ngIf="toggleWrapper" class="register__wrapper">
+  <h2 class="login__title">Registrierung</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="signUp()">
+    <div class="register">
+      <input class="login__field" type="email" placeholder="E-Mail" formControlName="registerEmail" required>
+      <input class="login__field" type="password" placeholder="Passwort" formControlName="registerPassword" required>
+      <button class="login__button" type="submit">Registrieren</button>
     </div>
-
-    <button class="login__button" type="submit" [disabled]="!loginForm.valid">Anmelden</button>
-  </div>
-</form>
-
-<!-- TODO Register Account (evtl. in separater component?) -->
-<h2>Register</h2>
-
-<form [formGroup]="registerForm" (ngSubmit)="signUp()">
-  <div class="register">
-    <input class="login__field" type="email" placeholder="E-Mail" formControlName="registerEmail" required>
-    <input class="login__field" type="password" placeholder="Passwort" formControlName="registerPassword" required>
-    <button class="login__button" type="submit">Registrieren</button>
-  </div>
-</form>
+  </form>
+</div>

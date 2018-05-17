@@ -11,6 +11,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
+  toggleWrapper = false;
 
   constructor(public authService: AuthService, private router: Router) { }
 
@@ -20,7 +21,6 @@ export class LoginComponent implements OnInit {
       loginPassword: new FormControl('', Validators.required)
     });
 
-    // TODO register component
     this.registerForm = new FormGroup({
       registerEmail: new FormControl('', [Validators.required, Validators.email]),
       registerPassword: new FormControl('', Validators.required)
@@ -31,10 +31,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginWithMail(this.loginForm.value.loginEmail, this.loginForm.value.loginPassword)
       .then(() => {
         this.router.navigate(['/profile']);
-        // TODO Feedback an UI
-        console.log('User successfully logged in!')
       }, (err) => {
-        console.log('Password or user wrong!');
       });
   }
 

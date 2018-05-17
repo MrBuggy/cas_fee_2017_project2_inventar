@@ -12,4 +12,6 @@ export class InventoryListItem {
   rating?: number;
   userID: string;
   userRated?: Array<string>;
+  userMail?: string;
+  userName?: string;
 }

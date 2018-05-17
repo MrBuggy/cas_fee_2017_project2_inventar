@@ -4,6 +4,6 @@ export class InventoryList {
   $key: string;
   name: string;
   hasWarning: boolean;
-  items: InventoryListItem[];
+  items?: InventoryListItem[];
   userID: string;
 }

@@ -7,6 +7,16 @@
   justify-content: center;
   height: 100%;
 
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    text-align: center;
+    color: $ocean-blue;
+  }
+
   &__field {
     color: $ocean-blue;
     border: 1px solid $ultralight-gray;
@@ -23,5 +33,18 @@
     border-radius: $radius-3;
     outline: none;
     margin-top: $space-5;
+  }
+
+  &__validEmailMsg {
+    font-size: 13px;
+    color: $error;
+    margin-bottom: 2px;
+  }
+
+  &__toggleWrapper {
+    background-color: white;
+    border: none;
+    color: darken($heaven-blue, 10);
+    outline: transparent;
   }
 }

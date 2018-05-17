@@ -10,7 +10,6 @@
     position: relative;
     align-items: center;
     display: flex;
-    justify-content: space-between;
 
     &::after {
       content: "";
@@ -33,10 +32,42 @@
     font-size: 13px;
   }
 
+  &__ratingMedal {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: transparent;
+    margin-right: $space-10;
+  }
+
+  &__ratingMedal--bronze {
+    background-color: $bronze;
+  }
+
+  &__ratingMedal--silver {
+    background-color: $silver;
+  }
+
+  &__ratingMedal--gold {
+    background-color: $gold
+  }
+
   &__warning {
     font-size: 20px;
     color: $warning;
     margin-right: $space-20;
+  }
+}
+
+@media (min-width: $bp-l) {
+  .list {
+    &__item {
+      &:hover {
+        background-color: lighten($ultralight-gray, 12);
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+      }
+    }
   }
 }
 

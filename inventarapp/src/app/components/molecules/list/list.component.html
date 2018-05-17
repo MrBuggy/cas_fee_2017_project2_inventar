@@ -1,5 +1,6 @@
 <div class="list">
   <div class="list__item">
+    <div [ngClass]="[rating >= 5 ? 'list__ratingMedal--bronze' : '', rating >= 10 ? 'list__ratingMedal--silver' : '', rating >= 20 ? 'list__ratingMedal--gold' : '']" *ngIf="item.rating" class="list__ratingMedal"></div>
     <span class="list__item-title">{{displayString}}</span>
     <i *ngIf="item.hasWarning" class="fas fa-exclamation-triangle list__warning" title="Abweichungen im Inventar"></i>
   </div>
