@@ -30,7 +30,7 @@ export class InventoryService {
       }, err => {
         console.log(err);
       }
-    );
+      );
     });
   }
 
@@ -68,9 +68,9 @@ export class InventoryService {
         lending: {}
       });
       this.toastr.success('Element erfolgreich hinzugefügt!');
-  }, err => {
-    console.log(err);
-  });
+    }, err => {
+      console.log(err);
+    });
   }
 
   editInventoryItem(item: InventoryListItem, key: string, listID: string) {
@@ -113,7 +113,7 @@ export class InventoryService {
     const item = this.db.object<InventoryListItem>(path);
     this.authService.getCurrentUser().then((user) => {
       item.valueChanges().pipe(take(1)).subscribe(data => {
-        if(data.userRated == undefined){
+        if (data.userRated === undefined) {
           data.userRated = [];
         }
 
@@ -122,7 +122,7 @@ export class InventoryService {
       });
     }, err => {
       console.log(err);
-  });
+    });
   }
 
   loadSingleInventoryList(listID: string): Observable<InventoryList> {
