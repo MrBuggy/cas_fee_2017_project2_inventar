@@ -28,7 +28,7 @@ export class InventoryService {
       return this.db.list(this.apiPath, ref => ref.orderByChild('userID').equalTo(user.uid)).snapshotChanges().map((arr) => {
         return arr.map((snap) => Object.assign(snap.payload.val(), { $key: snap.key }));
       }, err => {
-        console.log(err);
+        this.toastr.error('Liste konnte nicht geladen werden!');
       }
       );
     });
@@ -100,11 +100,13 @@ export class InventoryService {
       list.name = listName;
       list.hasWarning = false;
       list.userID = result.uid;
+      list.userMail = result.email;
+      list.userName = result.displayName;
       list.items = new Array<InventoryListItem>();
       this.inventoryListsRef.push(list);
       this.toastr.success('Liste erfolgreich hinzugefügt!');
     }, err => {
-      console.log(err);
+      this.toastr.error('Liste konnte nicht erstellt werden!');
     });
   }
 
@@ -121,7 +123,7 @@ export class InventoryService {
         item.update({ rating: data.rating + 1, userRated: data.userRated });
       });
     }, err => {
-      console.log(err);
+      this.toastr.error('Item konnte nicht bewertet werden!');
     });
   }
 
