@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+
+import { NavigationItem } from '../models/navgationItem';
+import { NAVIGATION } from '../models/mock-navigation';
 
 @Injectable()
 export class NavigationService {
-  constructor(private http: Http) {}
+  constructor() {}
 
-  loadNavigationList() {
-    return this.http.get('/assets/mock/navigation/list.json')
-      .map((res: Response) => res.json());
+  loadNavigationList(): Observable<NavigationItem[]> {
+    return of(NAVIGATION);
   }
 }
