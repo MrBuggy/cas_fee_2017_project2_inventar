@@ -4,7 +4,7 @@
   <div class="inventory-edit__wrapper">
     <span class="inventory-edit__label">Name</span>
 
-    <input class="inventory-edit__data" [(ngModel)]="list.name" type="text" value="{{list.name}}">
+    <input *ngIf="list" class="inventory-edit__data" [(ngModel)]="list.name" type="text" value="{{list.name}}">
   </div>
 
   <div class="inventory-edit__wrapper">

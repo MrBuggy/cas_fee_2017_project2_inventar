@@ -14,7 +14,7 @@ import { AuthService } from '../../../services/auth.service';
 export class ProfileEditComponent {
   stateList: StateList = {
     state: 'save',
-    routerLink: ''
+    routerLink: '/profile'
   };
   authState: firebase.User;
   displayName: string;
