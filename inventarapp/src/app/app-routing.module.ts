@@ -19,18 +19,18 @@ import { ProfileEditComponent } from './components/molecules/profile-edit/profil
 // Route Configuration
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'inventory', component: InventoryComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'inventory-items/:id', component: InventoryItemsComponent },
-  { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent },
-  { path: 'inventory-item-detail-edit/:id/:listID', component: InventoryItemDetailEditComponent },
-  { path: 'inventory-item-detail-add/:listID', component: InventoryItemDetailAddComponent },
-  { path: 'list-add', component: ListAddComponent },
-  { path: 'search-detail/:id/:listID', component: SearchDetailComponent },
-  { path: 'inventory-edit/:id', component: InventoryEditComponent },
-  { path: 'profile-edit', component: ProfileEditComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+  { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
+  { path: 'inventory-items/:id', component: InventoryItemsComponent, canActivate: [AuthGuard] },
+  { path: 'inventory-item-detail/:id/:listID', component: InventoryItemDetailComponent, canActivate: [AuthGuard] },
+  { path: 'inventory-item-detail-edit/:id/:listID', component: InventoryItemDetailEditComponent, canActivate: [AuthGuard] },
+  { path: 'inventory-item-detail-add/:listID', component: InventoryItemDetailAddComponent, canActivate: [AuthGuard] },
+  { path: 'list-add', component: ListAddComponent, canActivate: [AuthGuard] },
+  { path: 'search-detail/:id/:listID', component: SearchDetailComponent, canActivate: [AuthGuard] },
+  { path: 'inventory-edit/:id', component: InventoryEditComponent, canActivate: [AuthGuard] },
+  { path: 'profile-edit', component: ProfileEditComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -38,4 +38,4 @@ const appRoutes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
