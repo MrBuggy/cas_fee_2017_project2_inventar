@@ -26,12 +26,20 @@ export class SearchService {
   }
 
   loadSearchResults(searchString: string): InventoryListItem[] {
+    if (searchString) {
+      searchString = searchString.toLowerCase();
+    }
+
     this.searchResults = [];
     this.authService.getCurrentUser().then((user) => {
       this.db.list(this.apiPath).snapshotChanges().subscribe(datas => {
         datas.forEach(data => {
           const path = `${this.apiPath}/${data.key}/items`;
-          this.db.list(path, ref => ref.orderByChild('name').startAt(searchString).endAt(searchString + '\uf8ff'))
+          this.db.list(path, ref =>
+            ref
+              .orderByChild('lowerCaseName')
+              .startAt(searchString)
+              .endAt(searchString + '\uf8ff'))
             .snapshotChanges().subscribe(items =>
               items.forEach(item => {
                 if (item.payload.val().userID !== user.uid) {

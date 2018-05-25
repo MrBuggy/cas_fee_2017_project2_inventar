@@ -59,6 +59,7 @@ export class InventoryService {
     this.authService.getCurrentUser().then(user => {
       this.db.list(path).push({
         name: item.name,
+        lowerCaseName: item.name.toLowerCase(),
         count: item.count,
         value: item.value,
         hasWarning: false,
@@ -80,6 +81,7 @@ export class InventoryService {
 
     this.db.object(path).update({
       name: item.name,
+      lowerCaseName: item.name.toLowerCase(),
       count: item.count,
       hasWarning: item.hasWarning || false,
       value: item.value,
