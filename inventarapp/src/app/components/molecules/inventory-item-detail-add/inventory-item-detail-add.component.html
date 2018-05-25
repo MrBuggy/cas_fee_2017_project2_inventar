@@ -2,11 +2,6 @@
 
 <div class="inventory-item-detail-add">
   <div class="inventory-item-detail-add__wrapper">
-    <span class="inventory-item-detail-add__label inventory-item-detail-add__label--photo">Foto</span>
-    <i class="fas fa-camera inventory-item-detail-add__photo"></i>
-    <!-- <input type="file"> -->
-  </div>
-  <div class="inventory-item-detail-add__wrapper">
     <span class="inventory-item-detail-add__label">Name</span>
     <input class="inventory-item-detail-add__data" [(ngModel)]="item.name" type="text">
   </div>
@@ -17,22 +12,6 @@
   <div class="inventory-item-detail-add__wrapper">
     <span class="inventory-item-detail-add__label">Einzelwert in CHF {{item.value ? ' / Gesamt: ' + item.count * item.value + ' CHF' : ''}} </span>
     <input class="inventory-item-detail-add__data" type="number" [(ngModel)]="item.value">
-  </div>
-  <div class="inventory-item-detail-add__wrapper" *ngIf="item.hasWarning && item.lending.from.length > 0">
-    <div class="inventory-item-detail-add__wrapper" *ngFor="let item of item.lending.from">
-      <span class="inventory-item-detail-add__label">Ausgeliehen von:</span>
-      <input class="inventory-item-detail-add__data" type="number" [(ngModel)]="item.count">
-      <span class="inventory-item-detail-add__data" >{{item.name}}</span>
-      <button class="inventory-item-detail-add__lendingBtn" (click)="item.lending = false">Leihe beenden</button>
-    </div>
-  </div>
-  <div class="inventory-item-detail-add__wrapper" *ngIf="item.hasWarning && item.lending.to.length > 0">
-    <div class="inventory-item-detail-add__wrapper" *ngFor="let item of item.lending.to">
-      <span class="inventory-item-detail-add__label">Ausgeliehen an:</span>
-      <input class="inventory-item-detail-add__data" type="number" [(ngModel)]="item.count">
-      <span class="inventory-item-detail-add__data" >{{item.name}}</span>
-      <button class="inventory-item-detail-add__lendingBtn" (click)="item.lending = false">Leihe beenden</button>
-    </div>
   </div>
 </div>
 

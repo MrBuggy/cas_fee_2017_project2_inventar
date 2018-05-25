@@ -9,12 +9,6 @@
     color: $light-gray;
   }
 
-  &__label--photo,
-  &__photo {
-    display: flex;
-    justify-content: center;
-  }
-
   &__data {
     color: $ocean-blue;
   }
@@ -24,15 +18,6 @@
     flex-direction: column;
     border-bottom: 1px solid $ultralight-gray;
     padding: $space-5 $space-15;
-  }
-
-  &__wrapper--photo {
-    justify-content: center;
-  }
-
-  &__photo {
-    font-size: 80px;
-    color: $ultralight-gray;
   }
 
   &__button--disabled {
