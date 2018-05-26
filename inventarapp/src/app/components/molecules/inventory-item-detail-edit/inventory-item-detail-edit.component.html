@@ -1,42 +1,31 @@
 <main-header [title]="item.name + ' - Bearbeitung'" [hasCancel]="true" (btnCancel)="cancel()"></main-header>
 
-<div class="inventory-item-detail-edit">
-  <div class="inventory-item-detail-edit__wrapper">
-    <span class="inventory-item-detail-edit__label inventory-item-detail-edit__label--photo">Foto</span>
-    <i class="fas fa-camera inventory-item-detail-edit__photo"></i>
-    <!-- <input type="file"> -->
-  </div>
-  <div class="inventory-item-detail-edit__wrapper">
-    <span class="inventory-item-detail-edit__label">Name</span>
-    <input class="inventory-item-detail-edit__data" [(ngModel)]="item.name" type="text" value="{{item.name}}">
-  </div>
-  <div class="inventory-item-detail-edit__wrapper">
-    <span class="inventory-item-detail-edit__label">Anzahl</span>
-    <input class="inventory-item-detail-edit__data" [(ngModel)]="item.count" type="number" value="{{item.count}}">
-  </div>
-  <div class="inventory-item-detail-edit__wrapper">
-    <span class="inventory-item-detail-edit__label">Einzelwert in CHF {{item.value ? ' / Gesamt: ' + item.count * item.value + ' CHF' : ''}} </span>
-    <input class="inventory-item-detail-edit__data" type="number" [(ngModel)]="item.value" value="{{item.value}}">
-  </div>
-  <div class="inventory-item-detail-edit__wrapper" *ngIf="item.hasWarning && item.lending.from.length > 0">
-    <div class="inventory-item-detail-edit__wrapper" *ngFor="let item of item.lending.from">
-      <span class="inventory-item-detail-edit__label">Ausgeliehen von:</span>
-      <input class="inventory-item-detail-edit__data" type="number" [(ngModel)]="item.count" value="{{item.count}}">
-      <span class="inventory-item-detail-edit__data" >{{item.name}}</span>
-      <button class="inventory-item-detail-edit__lendingBtn" (click)="item.lending = false">Leihe beenden</button>
+<form [formGroup]="inventoryItemEditForm">
+  <div class="inventory-item-detail-edit">
+    <div class="inventory-item-detail-edit__wrapper">
+      <span class="inventory-item-detail-edit__label inventory-item-detail-edit__label--photo">Foto</span>
+      <i class="fas fa-camera inventory-item-detail-edit__photo"></i>
     </div>
-  </div>
-  <div class="inventory-item-detail-edit__wrapper" *ngIf="item.hasWarning && item.lending.to.length > 0">
-    <div class="inventory-item-detail-edit__wrapper" *ngFor="let item of item.lending.to">
-      <span class="inventory-item-detail-edit__label">Ausgeliehen an:</span>
-      <input class="inventory-item-detail-edit__data" type="number" [(ngModel)]="item.count" value="{{item.count}}">
-      <span class="inventory-item-detail-edit__data" >{{item.name}}</span>
-      <button class="inventory-item-detail-edit__lendingBtn" (click)="item.lending = false">Leihe beenden</button>
+    <div class="inventory-item-detail-edit__wrapper">
+      <span class="inventory-item-detail-edit__label">Name</span>
+      <input class="inventory-item-detail-edit__data" [(ngModel)]="item.name" type="text" value="{{item.name}}" formControlName="itemName">
+      <div class="inventory-item-detail-edit__validItemNameMsg" *ngIf="!inventoryItemEditForm.get('itemName').valid && inventoryItemEditForm.get('itemName').touched">
+          Bitte erfassen Sie einen Namen für den Gegenstand.
+        </div>
     </div>
-  </div>
-  <div class="inventory-item-detail-edit__wrapper">
-    <button class="inventory-item-detail-edit__deleteBtn" (click)="delete()">L&ouml;schen</button>
-  </div>
-</div>
+    <div class="inventory-item-detail-edit__wrapper">
+      <span class="inventory-item-detail-edit__label">Anzahl</span>
+      <input class="inventory-item-detail-edit__data" [(ngModel)]="item.count" type="number" value="{{item.count}}" formControlName="itemCount">
+    </div>
+    <div class="inventory-item-detail-edit__wrapper">
+      <span class="inventory-item-detail-edit__label">Einzelwert in CHF {{item.value ? ' / Gesamt: ' + item.count * item.value + ' CHF' : ''}} </span>
+      <input class="inventory-item-detail-edit__data" type="number" [(ngModel)]="item.value" value="{{item.value}}" formControlName="itemValue">
+    </div>
 
-<action-button [stateList]="stateList" (btnClick)="save()"></action-button>
+    <div class="inventory-item-detail-edit__wrapper">
+      <button type="button" class="inventory-item-detail-edit__deleteBtn" (click)="delete()">L&ouml;schen</button>
+    </div>
+  </div>
+</form>
+
+<action-button *ngIf="inventoryItemEditForm.valid" [stateList]="stateList" (btnClick)="save()"></action-button>

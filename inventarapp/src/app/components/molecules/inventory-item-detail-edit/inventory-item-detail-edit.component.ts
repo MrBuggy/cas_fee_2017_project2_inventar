@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
@@ -14,6 +15,7 @@ export class InventoryItemDetailEditComponent implements OnInit {
   item: InventoryListItem;
   id: string;
   listID: string;
+  inventoryItemEditForm: FormGroup;
 
   stateList: StateList = {
     state: 'save',
@@ -30,6 +32,12 @@ export class InventoryItemDetailEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.inventoryItemEditForm = new FormGroup({
+      itemName: new FormControl('', Validators.required),
+      itemCount: new FormControl(''),
+      itemValue: new FormControl('')
+    });
+
     this.route.params.subscribe(params => this.id = params['id']);
     this.route.params.subscribe(params => this.listID = params['listID']);
 

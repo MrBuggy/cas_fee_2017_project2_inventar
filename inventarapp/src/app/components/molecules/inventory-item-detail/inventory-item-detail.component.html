@@ -17,14 +17,6 @@
     <span class="inventory-item-detail__label">Gesamtwert in CHF</span>
     <span class="inventory-item-detail__data">{{item?.count * item.value}}</span>
   </div>
-  <div *ngIf="item.hasWarning && item.lending.from.length > 0" class="inventory-item-detail__wrapper">
-    <span class="inventory-item-detail__label">Ausgeliehen von: <i *ngIf="item.hasWarning" class="fas fa-exclamation-triangle inventory-item-detail__warning" title="Abweichungen im Inventar"></i></span>
-    <span class="inventory-item-detail__data" *ngFor="let item of item.lending.from">{{item?.count}} {{item?.count > 1 ? 'St&uuml;cke' : 'St&uuml;ck'}} von {{item?.name}}</span>
-  </div>
-  <div *ngIf="item.hasWarning && item.lending.to.length > 0" class="inventory-item-detail__wrapper">
-    <span class="inventory-item-detail__label">Ausgeliehen an: <i *ngIf="item.hasWarning" class="fas fa-exclamation-triangle inventory-item-detail__warning" title="Abweichungen im Inventar"></i></span>
-    <span class="inventory-item-detail__data" *ngFor="let item of item.lending.to">{{item?.count}} {{item?.count > 1 ? 'St&uuml;cke' : 'St&uuml;ck'}} an {{item?.name}}</span>
-  </div>
 </div>
 
 <action-button [stateList]="stateList"></action-button>

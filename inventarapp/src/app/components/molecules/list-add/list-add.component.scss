@@ -15,6 +15,12 @@
     outline: none;
   }
 
+  &__validListNameMsg {
+    font-size: 13px;
+    color: $error;
+    margin-bottom: 2px;
+  }
+
   &__wrapper {
     display: flex;
     flex-direction: column;

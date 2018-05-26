@@ -1,15 +1,22 @@
 <main-header [title]="'Liste bearbeiten'" [hasCancel]="true" (btnCancel)="cancel()"></main-header>
 
-<div class="inventory-edit">
-  <div class="inventory-edit__wrapper">
-    <span class="inventory-edit__label">Name</span>
+<div *ngIf="list">
+  <form [formGroup]="inventoryEditForm">
+    <div class="inventory-edit">
+      <div class="inventory-edit__wrapper">
+        <span class="inventory-edit__label">Name</span>
 
-    <input *ngIf="list" class="inventory-edit__data" [(ngModel)]="list.name" type="text" value="{{list.name}}">
-  </div>
+        <input class="inventory-edit__data" [(ngModel)]="list.name" type="text" value="{{list.name}}" formControlName="listName">
+        <div class="inventory-edit__validListNameMsg" *ngIf="!inventoryEditForm.get('listName').valid">
+          Bitte erfassen Sie einen Listennamen.
+        </div>
+      </div>
+    </div>
 
-  <div class="inventory-edit__wrapper">
-    <button class="inventory-edit__deleteBtn" (click)="delete()">L&ouml;schen</button>
-  </div>
+    <div class="inventory-edit__wrapper">
+      <button type="button" class="inventory-edit__deleteBtn" (click)="delete()">L&ouml;schen</button>
+    </div>
+  </form>
+
+  <action-button *ngIf="inventoryEditForm.valid" [stateList]="stateList" (btnClick)="save()"></action-button>
 </div>
-
-<action-button [stateList]="stateList" (btnClick)="save()"></action-button>
