@@ -1,13 +1,15 @@
 <main-header [title]="componentName"></main-header>
 
-<div class="search">
-  <div class="search__filter">
-    <input type="text" class="search__argument" placeholder="Suchbegriff eingeben..." [(ngModel)]="searchString">
-    <button class="search__searchBtn" (click)="search()">
-      <i class="fas fa-search search__icon" title="Suche starten..."></i>
-    </button>
+<form [formGroup]="searchForm" (ngSubmit)="search()">
+  <div class="search">
+    <div class="search__filter">
+      <input type="text" class="search__argument" placeholder="Suchbegriff eingeben..." [(ngModel)]="searchString" formControlName="searchTerm">
+      <button class="search__searchBtn" type="submit">
+        <i class="fas fa-search search__icon" title="Suche starten..."></i>
+      </button>
+    </div>
   </div>
-</div>
+</form>
 
 <div class="search__result">
   <div *ngFor="let item of searchResultList" [routerLink]="['/search-detail', item.$key, item.listID]">
