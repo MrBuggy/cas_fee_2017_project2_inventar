@@ -13,8 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class SearchService {
-  private apiPath = '/inventoryList';
-
+  apiPath = '/inventoryList';
+  searchTerm: string;
   inventoryListsRef: AngularFireList<InventoryList>;
   searchResults: InventoryListItem[];
 
@@ -30,6 +30,7 @@ export class SearchService {
       searchString = searchString.toLowerCase();
     }
 
+    this.searchTerm = searchString;
     this.searchResults = [];
     this.authService.getCurrentUser().then((user) => {
       this.db.list(this.apiPath).snapshotChanges().subscribe(datas => {

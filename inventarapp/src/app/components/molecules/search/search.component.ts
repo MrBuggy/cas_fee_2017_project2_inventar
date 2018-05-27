@@ -16,21 +16,25 @@ export class SearchComponent implements OnInit {
   searchForm: FormGroup;
 
   constructor(private _searchService: SearchService, private toastr: ToastrService) {
+    setTimeout(() => {
+      _searchService.searchTerm = '';
+    }, 1000);
   }
 
   ngOnInit() {
+    this.searchString = this._searchService.searchTerm || '';
     this.searchForm = new FormGroup({
       searchTerm: new FormControl('', Validators.maxLength(255))
-  });
-}
+    });
+  }
 
-search() {
-  this.searchResultList = this._searchService.loadSearchResults(this.searchString);
+  search() {
+    this.searchResultList = this._searchService.loadSearchResults(this.searchString);
 
-  setTimeout(() => {
-    if (this.searchResultList.length === 0) {
-      this.toastr.info('Keine Suchergebnisse gefunden!');
-    }
-  }, 1000);
-}
+    setTimeout(() => {
+      if (this.searchResultList.length === 0) {
+        this.toastr.info('Keine Suchergebnisse gefunden!');
+      }
+    }, 1000);
+  }
 }
