@@ -9,17 +9,23 @@
     <div class="inventory-item-detail-add__wrapper">
       <span class="inventory-item-detail-add__label">Name</span>
       <input class="inventory-item-detail-add__data" [(ngModel)]="item.name" type="text" formControlName="itemName">
-      <div class="inventory-item-detail-add__validItemNameMsg" *ngIf="!inventoryItemAddForm.get('itemName').valid && inventoryItemAddForm.get('itemName').touched">
+      <div class="inventory-item-detail-add__validItemMsg" *ngIf="!inventoryItemAddForm.get('itemName').valid && inventoryItemAddForm.get('itemName').touched">
         Bitte erfassen Sie einen Namen für den neuen Gegenstand.
       </div>
     </div>
     <div class="inventory-item-detail-add__wrapper">
       <span class="inventory-item-detail-add__label">Anzahl</span>
       <input class="inventory-item-detail-add__data" [(ngModel)]="item.count" type="number" formControlName="itemCount">
+      <div class="inventory-item-detail-add__validItemMsg" *ngIf="!inventoryItemAddForm.get('itemCount').valid && inventoryItemAddForm.get('itemCount').touched">
+        Die Anzahl muss grösser als 0 sein.
+      </div>
     </div>
     <div class="inventory-item-detail-add__wrapper">
       <span class="inventory-item-detail-add__label">Einzelwert in CHF {{item.value ? ' / Gesamt: ' + item.count * item.value + ' CHF' : ''}} </span>
       <input class="inventory-item-detail-add__data" type="number" [(ngModel)]="item.value" formControlName="itemValue">
+      <div class="inventory-item-detail-add__validItemMsg" *ngIf="!inventoryItemAddForm.get('itemValue').valid && inventoryItemAddForm.get('itemValue').touched">
+        Der Wert darf nicht kleiner als 0 sein.
+      </div>
     </div>
   </div>
 </form>

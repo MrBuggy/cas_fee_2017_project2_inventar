@@ -9,17 +9,23 @@
     <div class="inventory-item-detail-edit__wrapper">
       <span class="inventory-item-detail-edit__label">Name</span>
       <input class="inventory-item-detail-edit__data" [(ngModel)]="item.name" type="text" value="{{item.name}}" formControlName="itemName">
-      <div class="inventory-item-detail-edit__validItemNameMsg" *ngIf="!inventoryItemEditForm.get('itemName').valid && inventoryItemEditForm.get('itemName').touched">
-          Bitte erfassen Sie einen Namen für den Gegenstand.
-        </div>
+      <div class="inventory-item-detail-edit__validItemMsg" *ngIf="!inventoryItemEditForm.get('itemName').valid && inventoryItemEditForm.get('itemName').touched">
+        Bitte erfassen Sie einen Namen für den Gegenstand.
+      </div>
     </div>
     <div class="inventory-item-detail-edit__wrapper">
       <span class="inventory-item-detail-edit__label">Anzahl</span>
       <input class="inventory-item-detail-edit__data" [(ngModel)]="item.count" type="number" value="{{item.count}}" formControlName="itemCount">
+      <div class="inventory-item-detail-edit__validItemMsg" *ngIf="!inventoryItemEditForm.get('itemCount').valid && inventoryItemEditForm.get('itemCount').touched">
+        Die Anzahl muss grösser als 0 sein.
+      </div>
     </div>
     <div class="inventory-item-detail-edit__wrapper">
       <span class="inventory-item-detail-edit__label">Einzelwert in CHF {{item.value ? ' / Gesamt: ' + item.count * item.value + ' CHF' : ''}} </span>
       <input class="inventory-item-detail-edit__data" type="number" [(ngModel)]="item.value" value="{{item.value}}" formControlName="itemValue">
+      <div class="inventory-item-detail-edit__validItemMsg" *ngIf="!inventoryItemEditForm.get('itemValue').valid && inventoryItemEditForm.get('itemValue').touched">
+        Der Wert darf nicht kleiner als 0 sein.
+      </div>
     </div>
 
     <div class="inventory-item-detail-edit__wrapper">

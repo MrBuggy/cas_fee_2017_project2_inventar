@@ -36,8 +36,8 @@ export class InventoryItemDetailAddComponent implements OnInit {
   ngOnInit() {
     this.inventoryItemAddForm = new FormGroup({
       itemName: new FormControl('', Validators.required),
-      itemCount: new FormControl(''),
-      itemValue: new FormControl('')
+      itemCount: new FormControl('', [Validators.min(1), Validators.required]),
+      itemValue: new FormControl('', [Validators.min(0), Validators.required])
     });
 
     this.route.params.subscribe(params => this.listID = params['listID']);

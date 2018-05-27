@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchForm = new FormGroup({
-      searchTerm: new FormControl()
+      searchTerm: new FormControl('', Validators.maxLength(255))
   });
 }
 
