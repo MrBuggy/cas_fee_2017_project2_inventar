@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryListItem } from '../../../models/inventory-list-item';
 import { InventoryService } from '../../../services/inventory.service';
 import { StateList } from '../../../models/state';
@@ -24,7 +23,7 @@ export class InventoryItemDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private _inventoryService: InventoryService,
-    private location: Location
+    private router: Router
   ) {
     this.item = new InventoryListItem();
   }
@@ -39,12 +38,12 @@ export class InventoryItemDetailComponent implements OnInit, OnDestroy {
   loadItem(): void {
     this.inventoryListItemSubscription = this._inventoryService.loadInventoryListItem(this.id, this.listID)
       .subscribe(data => this.item = data);
-
     this.stateList.routerLink = `/inventory-item-detail-edit/${this.id}/${this.listID}`;
   }
 
   goBack(): void {
-    this.location.back();
+    this.stateList.routerLink = `/inventory-items/${this.listID}`;
+    this.router.navigate([this.stateList.routerLink]);
   }
 
   ngOnDestroy() {

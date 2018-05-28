@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryList } from '../../../models/inventory-list';
 import { StateList } from '../../../models/state';
@@ -26,7 +25,6 @@ export class InventoryEditComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private _inventoryService: InventoryService,
-    private location: Location,
     private router: Router,
     private toastr: ToastrService
   ) { }
@@ -46,7 +44,6 @@ export class InventoryEditComponent implements OnInit, OnDestroy {
     }, (err) => {
       this.toastr.error('Die Liste konnte nicht gespeichert werden.');
     });
-    this.stateList.routerLink = `/inventory-list/${this.listID}`;
     this.goBack();
   }
 
@@ -64,7 +61,8 @@ export class InventoryEditComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.location.back();
+    this.stateList.routerLink = `/inventory-items/${this.listID}`;
+    this.router.navigate([this.stateList.routerLink]);
   }
 
   loadList() {

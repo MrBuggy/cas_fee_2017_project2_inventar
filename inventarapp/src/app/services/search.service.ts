@@ -21,6 +21,8 @@ export class SearchService {
   getSearchResultsRef(key, searchString): AngularFireList<InventoryListItem> {
     if (searchString) {
       searchString = searchString.toLowerCase();
+    } else {
+      searchString = undefined;
     }
     this.searchTerm = searchString;
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryListItem } from '../../../models/inventory-list-item';
 import { StateList } from '../../../models/state';
@@ -30,7 +29,7 @@ export class InventoryItemDetailAddComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _inventoryService: InventoryService,
-    private location: Location
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -45,7 +44,6 @@ export class InventoryItemDetailAddComponent implements OnInit {
 
   save() {
     this._inventoryService.addInventoryItem(this.item, this.listID);
-    this.stateList.routerLink = `/inventory-items/${this.listID}`;
     this.goBack();
   }
 
@@ -54,6 +52,7 @@ export class InventoryItemDetailAddComponent implements OnInit {
   }
 
   goBack(): void {
-    this.location.back();
+    this.stateList.routerLink = `/inventory-items/${this.listID}`;
+    this.router.navigate([this.stateList.routerLink]);
   }
 }

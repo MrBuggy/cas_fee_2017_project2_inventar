@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryListItem } from '../../../models/inventory-list-item';
 import { StateList } from '../../../models/state';
@@ -18,7 +17,6 @@ export class InventoryItemDetailEditComponent implements OnInit, OnDestroy {
   listID: string;
   inventoryItemEditForm: FormGroup;
   inventoryItemEditSubscription: Subscription;
-
   stateList: StateList = {
     state: 'save',
     routerLink: ''
@@ -27,7 +25,6 @@ export class InventoryItemDetailEditComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private _inventoryService: InventoryService,
-    private location: Location,
     private router: Router
   ) {
     this.item = new InventoryListItem();
@@ -53,7 +50,6 @@ export class InventoryItemDetailEditComponent implements OnInit, OnDestroy {
 
   save() {
     this._inventoryService.editInventoryItem(this.item, this.id, this.listID);
-    this.stateList.routerLink = `/inventory-items/${this.id}/${this.listID}`;
     this.goBack();
   }
 
@@ -67,7 +63,8 @@ export class InventoryItemDetailEditComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.location.back();
+    this.stateList.routerLink = `/inventory-item-detail/${this.id}/${this.listID}`;
+    this.router.navigate([this.stateList.routerLink]);
   }
 
   ngOnDestroy() {
