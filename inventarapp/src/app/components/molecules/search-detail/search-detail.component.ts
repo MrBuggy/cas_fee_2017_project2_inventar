@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryListItem } from '../../../models/inventory-list-item';
@@ -6,17 +6,19 @@ import { InventoryService } from '../../../services/inventory.service';
 import { StateList } from '../../../models/state';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../services/auth.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'search-detail',
   templateUrl: './search-detail.component.html',
   styleUrls: ['./search-detail.component.scss']
 })
-export class SearchDetailComponent implements OnInit {
+export class SearchDetailComponent implements OnInit, OnDestroy {
   item: InventoryListItem;
   id: string;
   listID: string;
   hasLiked: boolean;
+  inventoryListSubscription: Subscription;
   stateList: StateList = {
     state: 'like',
     routerLink: ''
@@ -37,7 +39,7 @@ export class SearchDetailComponent implements OnInit {
     this.route.params.subscribe(params => (this.listID = params['listID']));
     this.stateList.routerLink = `/search-detail/${this.id}/${this.listID}`;
 
-    this._inventoryService
+    this.inventoryListSubscription = this._inventoryService
       .loadInventoryListItem(this.id, this.listID)
       .subscribe(result => {
         this.item = result;
@@ -62,5 +64,9 @@ export class SearchDetailComponent implements OnInit {
         this.hasLiked = false;
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.inventoryListSubscription.unsubscribe();
   }
 }

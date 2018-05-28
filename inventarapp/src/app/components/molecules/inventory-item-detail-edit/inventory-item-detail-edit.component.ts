@@ -1,21 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
 import { InventoryListItem } from '../../../models/inventory-list-item';
 import { StateList } from '../../../models/state';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'inventory-item-detail-edit',
   templateUrl: './inventory-item-detail-edit.component.html',
   styleUrls: ['./inventory-item-detail-edit.component.scss']
 })
-export class InventoryItemDetailEditComponent implements OnInit {
+export class InventoryItemDetailEditComponent implements OnInit, OnDestroy {
   item: InventoryListItem;
   id: string;
   listID: string;
   inventoryItemEditForm: FormGroup;
+  inventoryItemEditSubscription: Subscription;
 
   stateList: StateList = {
     state: 'save',
@@ -45,7 +47,7 @@ export class InventoryItemDetailEditComponent implements OnInit {
   }
 
   loadItem(): void {
-    this._inventoryService.loadInventoryListItem(this.id, this.listID)
+    this.inventoryItemEditSubscription = this._inventoryService.loadInventoryListItem(this.id, this.listID)
       .subscribe(data => this.item = data);
   }
 
@@ -66,5 +68,9 @@ export class InventoryItemDetailEditComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.inventoryItemEditSubscription.unsubscribe();
   }
 }

@@ -1,16 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryListItem } from '../../../models/inventory-list-item';
 import { InventoryService } from '../../../services/inventory.service';
 import { StateList } from '../../../models/state';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'inventory-item-detail',
   templateUrl: './inventory-item-detail.component.html',
   styleUrls: ['./inventory-item-detail.component.scss']
 })
-export class InventoryItemDetailComponent implements OnInit {
+export class InventoryItemDetailComponent implements OnInit, OnDestroy {
   item: InventoryListItem;
   id: string;
   listID: string;
@@ -18,6 +19,7 @@ export class InventoryItemDetailComponent implements OnInit {
     state: 'edit',
     routerLink: ''
   };
+  inventoryListItemSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +37,7 @@ export class InventoryItemDetailComponent implements OnInit {
   }
 
   loadItem(): void {
-    this._inventoryService.loadInventoryListItem(this.id, this.listID)
+    this.inventoryListItemSubscription = this._inventoryService.loadInventoryListItem(this.id, this.listID)
       .subscribe(data => this.item = data);
 
     this.stateList.routerLink = `/inventory-item-detail-edit/${this.id}/${this.listID}`;
@@ -43,5 +45,9 @@ export class InventoryItemDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.inventoryListItemSubscription.unsubscribe();
   }
 }

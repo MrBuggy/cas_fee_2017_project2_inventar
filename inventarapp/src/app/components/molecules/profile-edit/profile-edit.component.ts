@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StateList } from '../../../models/state';
@@ -6,13 +6,14 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../models/user';
 import * as firebase from 'firebase/app';
 import { AuthService } from '../../../services/auth.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'profile-edit',
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss']
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, OnDestroy {
   stateList: StateList = {
     state: 'save',
     routerLink: '/profile'
@@ -20,13 +21,14 @@ export class ProfileEditComponent implements OnInit {
   authState: firebase.User;
   displayName: string;
   profileForm: FormGroup;
+  userProfileSubscription: Subscription;
 
   constructor(
     private location: Location,
     private toastr: ToastrService,
     private authService: AuthService
   ) {
-    this.authService.loadCurrentUserProfile()
+    this.userProfileSubscription = this.authService.loadCurrentUserProfile()
       .subscribe(authState => {
         this.authState = authState;
         this.displayName = authState.displayName;
@@ -61,5 +63,9 @@ export class ProfileEditComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  ngOnDestroy() {
+    this.userProfileSubscription.unsubscribe();
   }
 }

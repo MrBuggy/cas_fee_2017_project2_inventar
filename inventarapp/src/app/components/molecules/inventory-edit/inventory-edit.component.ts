@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -6,13 +6,14 @@ import { InventoryService } from '../../../services/inventory.service';
 import { InventoryList } from '../../../models/inventory-list';
 import { StateList } from '../../../models/state';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'inventory-edit',
   templateUrl: './inventory-edit.component.html',
   styleUrls: ['./inventory-edit.component.scss']
 })
-export class InventoryEditComponent implements OnInit {
+export class InventoryEditComponent implements OnInit, OnDestroy {
   stateList: StateList = {
     state: 'save',
     routerLink: ''
@@ -20,6 +21,7 @@ export class InventoryEditComponent implements OnInit {
   listID: string;
   list: InventoryList;
   inventoryEditForm: FormGroup;
+  inventoryListSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,8 +68,12 @@ export class InventoryEditComponent implements OnInit {
   }
 
   loadList() {
-    this._inventoryService.loadSingleInventoryList(this.listID).subscribe(list => {
+    this.inventoryListSubscription = this._inventoryService.loadSingleInventoryList(this.listID).subscribe(list => {
       this.list = list;
     });
+  }
+
+  ngOnDestroy() {
+    this.inventoryListSubscription.unsubscribe();
   }
 }
