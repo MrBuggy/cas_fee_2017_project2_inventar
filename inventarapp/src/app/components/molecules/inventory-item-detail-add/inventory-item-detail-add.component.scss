@@ -9,12 +9,6 @@
     color: $light-gray;
   }
 
-  &__label--photo,
-  &__photo {
-    display: flex;
-    justify-content: center;
-  }
-
   &__data {
     color: $ocean-blue;
     border: none;
@@ -30,15 +24,6 @@
     &:last-child {
       border-bottom: none;
     }
-  }
-
-  &__wrapper--photo {
-    justify-content: center;
-  }
-
-  &__photo {
-    font-size: 80px;
-    color: $ultralight-gray;
   }
 
   &__warning {
