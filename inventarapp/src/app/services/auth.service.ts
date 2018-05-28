@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { User } from '../models/user';
-import { of } from 'rxjs/observable/of';
-import { take } from 'rxjs/operators/take';
-import { ToastrService } from 'ngx-toastr';
+import { AngularFireModule } from "angularfire2";
+import { AngularFireAuth } from "angularfire2/auth";
+import * as firebase from "firebase/app";
+import { Observable } from "rxjs/Observable";
+import { Router } from "@angular/router";
+import { AngularFireDatabase } from "angularfire2/database";
+import { User } from "../models/user";
+import { of } from "rxjs/observable/of";
+import { take } from "rxjs/operators/take";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable()
 export class AuthService {
   public user: Observable<User>;
   public authState: firebase.User;
+  public isLoggedIn: boolean = false;
 
   constructor(
     private fireAuth: AngularFireAuth,
@@ -35,11 +36,12 @@ export class AuthService {
     return this.fireAuth.auth.signInWithEmailAndPassword(email, password).then(
       user => {
         this.updateNewUser(user);
+        this.isLoggedIn = true;
       },
       err => {
         this.toastr.error(
-          'Login fehlgeschlagen',
-          'Benutzername oder Passwort sind falsch!'
+          "Login fehlgeschlagen",
+          "Benutzername oder Passwort sind falsch!"
         );
         throw err;
       }
@@ -58,7 +60,8 @@ export class AuthService {
       .then(
         user => {
           this.updateNewUser(user);
-          this.router.navigate(['/profile']);
+          this.router.navigate(["/profile"]);
+          this.isLoggedIn = true;
         },
         err => {
           this.toastr.error(err);
@@ -92,11 +95,15 @@ export class AuthService {
 
   logoutUser() {
     this.db.database.goOffline();
-    this.fireAuth.auth.signOut().then(() => {
-      this.router.navigate(['/login']);
-    }, (err) => {
-      this.toastr.error('Der User konnte nicht abgemeldet werden!');
-    });
+    this.fireAuth.auth.signOut().then(
+      () => {
+        this.router.navigate(["/login"]);
+        this.isLoggedIn = false;
+      },
+      err => {
+        this.toastr.error("Der User konnte nicht abgemeldet werden!");
+      }
+    );
   }
 
   getCurrentUser() {
@@ -105,7 +112,7 @@ export class AuthService {
         if (user) {
           resolve(user);
         } else {
-          reject('No user logged in');
+          reject("No user logged in");
         }
       });
     });
