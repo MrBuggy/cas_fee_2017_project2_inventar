@@ -21,6 +21,7 @@ export class MainHeaderComponent implements OnInit {
 
   authState: firebase.User;
   displayName: string;
+  email: string;
 
   constructor(private authService: AuthService, private route: ActivatedRoute) { }
 
@@ -37,6 +38,7 @@ export class MainHeaderComponent implements OnInit {
     .subscribe(authState => {
       this.authState = authState;
       this.displayName = authState.displayName;
+      this.email = authState.email;
     });
   }
 }
