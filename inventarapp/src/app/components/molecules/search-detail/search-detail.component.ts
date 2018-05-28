@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
-import { InventoryListItem } from "../../../models/inventory-list-item";
-import { InventoryService } from "../../../services/inventory.service";
-import { StateList } from "../../../models/state";
-import { ToastrService } from "ngx-toastr";
-import { AuthService } from "../../../services/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { InventoryListItem } from '../../../models/inventory-list-item';
+import { InventoryService } from '../../../services/inventory.service';
+import { StateList } from '../../../models/state';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: "search-detail",
-  templateUrl: "./search-detail.component.html",
-  styleUrls: ["./search-detail.component.scss"]
+  selector: 'search-detail',
+  templateUrl: './search-detail.component.html',
+  styleUrls: ['./search-detail.component.scss']
 })
 export class SearchDetailComponent implements OnInit {
   item: InventoryListItem;
@@ -18,8 +18,8 @@ export class SearchDetailComponent implements OnInit {
   listID: string;
   hasLiked: boolean;
   stateList: StateList = {
-    state: "like",
-    routerLink: ""
+    state: 'like',
+    routerLink: ''
   };
 
   constructor(
@@ -29,13 +29,12 @@ export class SearchDetailComponent implements OnInit {
     private toastr: ToastrService,
     private authService: AuthService
   ) {
-    // Init item
     this.item = new InventoryListItem();
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => (this.id = params["id"]));
-    this.route.params.subscribe(params => (this.listID = params["listID"]));
+    this.route.params.subscribe(params => (this.id = params['id']));
+    this.route.params.subscribe(params => (this.listID = params['listID']));
     this.stateList.routerLink = `/search-detail/${this.id}/${this.listID}`;
 
     this._inventoryService
@@ -48,7 +47,7 @@ export class SearchDetailComponent implements OnInit {
 
   likeItem() {
     this._inventoryService.rateItem(this.id, this.listID);
-    this.toastr.success("Gefällt dir!");
+    this.toastr.success('Gefällt dir!');
   }
 
   goBack(): void {
@@ -57,8 +56,7 @@ export class SearchDetailComponent implements OnInit {
 
   checkRating() {
     this.authService.getCurrentUser().then(user => {
-
-      if (this.item.userRated.includes(user.uid)) {
+      if (this.item.userRated && this.item.userRated.includes(user.uid)) {
         this.hasLiked = true;
       } else {
         this.hasLiked = false;
