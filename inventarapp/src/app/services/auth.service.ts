@@ -15,7 +15,7 @@ import { ToastrService } from "ngx-toastr";
 export class AuthService {
   public user: Observable<User>;
   public authState: firebase.User;
-  public isLoggedIn: boolean = false;
+  public isLoggedIn;
 
   constructor(
     private fireAuth: AngularFireAuth,
