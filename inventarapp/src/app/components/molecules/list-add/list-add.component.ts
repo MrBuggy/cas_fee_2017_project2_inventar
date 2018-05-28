@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
@@ -16,6 +17,7 @@ export class ListAddComponent implements OnInit {
     routerLink: '/inventory'
   };
   listName: string;
+  listAddForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +26,9 @@ export class ListAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.listAddForm = new FormGroup({
+      listAddName: new FormControl('', Validators.required)
+    });
   }
 
   save() {

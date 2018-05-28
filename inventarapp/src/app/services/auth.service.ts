@@ -48,7 +48,7 @@ export class AuthService {
 
   loadCurrentUserProfile(): Observable<firebase.User> {
     return this.fireAuth.authState.pipe(take(1)).map(user => {
-     return user;
+      return user;
     });
   }
 
@@ -91,8 +91,12 @@ export class AuthService {
   }
 
   logoutUser() {
-    this.fireAuth.auth.signOut();
-    this.router.navigate(['/login']);
+    this.db.database.goOffline();
+    this.fireAuth.auth.signOut().then(() => {
+      this.router.navigate(['/login']);
+    }, (err) => {
+      this.toastr.error('Der User konnte nicht abgemeldet werden!');
+    });
   }
 
   getCurrentUser() {

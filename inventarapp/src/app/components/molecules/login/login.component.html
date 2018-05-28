@@ -2,7 +2,7 @@
   <h2 class="login__title">Anmelden</h2>
   <form [formGroup]="loginForm" (ngSubmit)="loginWithMail()">
     <div class="login">
-      <div class="login__validEmailMsg" *ngIf="!loginForm.get('loginEmail').valid && loginForm.get('loginEmail').touched">
+      <div class="login__validLoginMsg" *ngIf="!loginForm.get('loginEmail').valid && loginForm.get('loginEmail').touched">
         Diese E-Mail ist ung&uuml;ltig!
       </div>
       <input class="login__field" type="email" placeholder="E-Mail" formControlName="loginEmail" required>
@@ -17,7 +17,13 @@
   <h2 class="login__title">Registrierung</h2>
   <form [formGroup]="registerForm" (ngSubmit)="signUp()">
     <div class="register">
+      <div class="login__validLoginMsg" *ngIf="!registerForm.get('registerEmail').valid && registerForm.get('registerEmail').touched">
+        Diese E-Mail ist ung&uuml;ltig!
+      </div>
       <input class="login__field" type="email" placeholder="E-Mail" formControlName="registerEmail" required>
+      <div class="login__validLoginMsg" *ngIf="!registerForm.get('registerPassword').valid && registerForm.get('registerPassword').touched">
+        Das Passwort muss min. 6 Zeichen lang sein!
+      </div>
       <input class="login__field" type="password" placeholder="Passwort" formControlName="registerPassword" required>
       <button class="login__button" type="submit">Registrieren</button>
     </div>

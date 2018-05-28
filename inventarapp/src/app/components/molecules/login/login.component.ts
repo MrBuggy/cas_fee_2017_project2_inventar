@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = new FormGroup({
       loginEmail: new FormControl('', [Validators.required, Validators.email]),
-      loginPassword: new FormControl('', Validators.required)
+      loginPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
 
     this.registerForm = new FormGroup({
       registerEmail: new FormControl('', [Validators.required, Validators.email]),
-      registerPassword: new FormControl('', Validators.required)
+      registerPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
 
@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     this.authService.loginWithMail(this.loginForm.value.loginEmail, this.loginForm.value.loginPassword)
       .then(() => {
         this.router.navigate(['/profile']);
-      }, (err) => {
       });
   }
 

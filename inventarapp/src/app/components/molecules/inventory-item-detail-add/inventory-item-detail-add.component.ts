@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
@@ -16,6 +17,7 @@ export class InventoryItemDetailAddComponent implements OnInit {
     id: -1,
     name: '',
     count: 0,
+    value: 0,
     hasWarning: false
   };
   stateList: StateList = {
@@ -23,6 +25,7 @@ export class InventoryItemDetailAddComponent implements OnInit {
     routerLink: ''
   };
   listID: string;
+  inventoryItemAddForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +34,12 @@ export class InventoryItemDetailAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.inventoryItemAddForm = new FormGroup({
+      itemName: new FormControl('', Validators.required),
+      itemCount: new FormControl('', [Validators.min(1), Validators.required]),
+      itemValue: new FormControl('', [Validators.min(0), Validators.required])
+    });
+
     this.route.params.subscribe(params => this.listID = params['listID']);
   }
 

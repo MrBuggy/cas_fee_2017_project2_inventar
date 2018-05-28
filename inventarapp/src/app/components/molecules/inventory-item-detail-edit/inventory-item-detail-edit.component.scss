@@ -30,6 +30,13 @@
     color: $warning;
   }
 
+  &__validItemMsg {
+    font-size: 13px;
+    color: $error;
+    margin-bottom: 2px;
+  }
+
+
   &__deleteBtn {
     border: none;
     background-color: lighten($error, 10);

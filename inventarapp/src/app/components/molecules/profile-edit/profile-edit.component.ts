@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { StateList } from '../../../models/state';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../../models/user';
@@ -11,13 +12,14 @@ import { AuthService } from '../../../services/auth.service';
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss']
 })
-export class ProfileEditComponent {
+export class ProfileEditComponent implements OnInit {
   stateList: StateList = {
     state: 'save',
-    routerLink: ''
+    routerLink: '/profile'
   };
   authState: firebase.User;
   displayName: string;
+  profileForm: FormGroup;
 
   constructor(
     private location: Location,
@@ -29,6 +31,12 @@ export class ProfileEditComponent {
         this.authState = authState;
         this.displayName = authState.displayName;
       });
+  }
+
+  ngOnInit() {
+    this.profileForm = new FormGroup({
+      profileName: new FormControl('', Validators.required)
+    });
   }
 
   save() {

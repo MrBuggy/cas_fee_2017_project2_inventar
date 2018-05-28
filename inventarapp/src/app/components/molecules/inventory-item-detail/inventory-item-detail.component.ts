@@ -24,7 +24,6 @@ export class InventoryItemDetailComponent implements OnInit {
     private _inventoryService: InventoryService,
     private location: Location
   ) {
-    // Init item
     this.item = new InventoryListItem();
   }
 

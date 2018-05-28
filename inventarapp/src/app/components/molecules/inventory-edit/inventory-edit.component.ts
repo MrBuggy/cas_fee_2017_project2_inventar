@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { InventoryService } from '../../../services/inventory.service';
@@ -18,6 +19,7 @@ export class InventoryEditComponent implements OnInit {
   };
   listID: string;
   list: InventoryList;
+  inventoryEditForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,9 +27,13 @@ export class InventoryEditComponent implements OnInit {
     private location: Location,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.inventoryEditForm = new FormGroup({
+      listName: new FormControl('', Validators.required)
+    });
+
     this.route.params.subscribe(params => this.listID = params['id']);
     this.loadList();
   }

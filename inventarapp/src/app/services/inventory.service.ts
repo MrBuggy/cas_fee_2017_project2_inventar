@@ -59,6 +59,7 @@ export class InventoryService {
     this.authService.getCurrentUser().then(user => {
       this.db.list(path).push({
         name: item.name,
+        lowerCaseName: item.name.toLowerCase(),
         count: item.count,
         value: item.value,
         hasWarning: false,
@@ -71,7 +72,7 @@ export class InventoryService {
       });
       this.toastr.success('Element erfolgreich hinzugefügt!');
     }, err => {
-      console.log(err);
+      this.toastr.error('Element konnte nicht hinzugefügt werden!');
     });
   }
 
@@ -80,20 +81,22 @@ export class InventoryService {
 
     this.db.object(path).update({
       name: item.name,
+      lowerCaseName: item.name.toLowerCase(),
       count: item.count,
       hasWarning: item.hasWarning || false,
       value: item.value,
       lending: item.lending || {}
+    }).then(() => {
+      this.toastr.success('Element erfolgreich gespeichert!');
     });
-
-    this.toastr.success('Element erfolgreich gespeichert!');
   }
 
   deleteInventoryItem(key: string, listID: string) {
     const path = `${this.apiPath}/${listID}/items/${key}`;
 
-    this.db.object(path).remove();
-    this.toastr.success('Element erfolgreich gelöscht!');
+    this.db.object(path).remove().then(() => {
+      this.toastr.success('Element erfolgreich gelöscht!');
+    });
   }
 
   addInventoryList(listName: string) {
