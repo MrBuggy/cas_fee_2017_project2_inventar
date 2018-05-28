@@ -23,6 +23,9 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.searchString = this._searchService.searchTerm || '';
+    if (this._searchService.searchTerm !== '') {
+      this.search();
+    }
     this.searchForm = new FormGroup({
       searchTerm: new FormControl('', Validators.maxLength(255))
     });
