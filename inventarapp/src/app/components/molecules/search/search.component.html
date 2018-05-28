@@ -3,7 +3,11 @@
 <form [formGroup]="searchForm" (ngSubmit)="search()">
   <div class="search">
     <div class="search__filter">
-      <input type="text" class="search__argument" placeholder="Inventar von anderen Benutzern durchst&ouml;bern..." [(ngModel)]="searchString" formControlName="searchTerm">
+      <input type="text" class="search__argument" placeholder="Inventar von anderen Benutzern durchst&ouml;bern..." [(ngModel)]="searchString"
+        formControlName="searchTerm">
+      <button *ngIf="searchString" class="search__searchBtn search__searchBtn--clear" (click)="clearSearch()">
+        <i class="fas fa-times search__icon" title="Sucher verwerfen"></i>
+      </button>
       <button class="search__searchBtn" type="submit">
         <i class="fas fa-search search__icon" title="Suche starten..."></i>
       </button>
@@ -12,6 +16,7 @@
 </form>
 
 <div class="search__result">
+  <span *ngIf="searchResultList.length == 0" class="search__no-result">Keine Suchergebnisse vorhanden</span>
   <div *ngFor="let item of searchResultList" [routerLink]="['/search-detail', item.$key, item.listID]">
     <list [item]="item" [displayString]="item.name + ' | ' + item.count + ' | ' + item.rating + ' Likes '" [rating]="item.rating"></list>
   </div>

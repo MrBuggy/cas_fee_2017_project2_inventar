@@ -33,11 +33,10 @@ export class SearchComponent implements OnInit {
 
   search() {
     this.searchResultList = this._searchService.loadSearchResults(this.searchString);
+  }
 
-    setTimeout(() => {
-      if (this.searchResultList.length === 0) {
-        this.toastr.info('Keine Suchergebnisse gefunden!');
-      }
-    }, 1000);
+  clearSearch() {
+    this.searchString = undefined;
+    this.searchResultList = [];
   }
 }
