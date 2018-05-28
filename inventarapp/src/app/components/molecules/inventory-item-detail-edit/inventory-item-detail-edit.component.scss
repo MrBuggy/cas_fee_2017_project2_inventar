@@ -9,12 +9,6 @@
     color: $light-gray;
   }
 
-  &__label--photo,
-  &__photo {
-    display: flex;
-    justify-content: center;
-  }
-
   &__data {
     color: $ocean-blue;
     border: none;
@@ -32,27 +26,8 @@
     }
   }
 
-  &__wrapper--photo {
-    justify-content: center;
-  }
-
-  &__photo {
-    font-size: 80px;
-    color: $ultralight-gray;
-  }
-
   &__warning {
     color: $warning;
-  }
-
-  &__lendingBtn {
-    border: none;
-    background-color: $heaven-blue;
-    color: white;
-    padding: $space-10 $space-5;
-    border-radius: $radius-3;
-    outline: none;
-    margin-top: $space-5;
   }
 
   &__deleteBtn {
