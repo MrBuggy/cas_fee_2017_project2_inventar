@@ -38,3 +38,20 @@
     justify-content: center;
   }
 }
+
+@media (min-width: $bp-l) {
+  .search {
+    &__searchBtn {
+      &:hover {
+        cursor: pointer;
+        background-color: darken($heaven-blue, 15);
+      }
+    }
+
+    &__searchBtn--clear {
+      &:hover {
+        background-color: lighten($error, 10);
+      }
+    }
+  }
+}

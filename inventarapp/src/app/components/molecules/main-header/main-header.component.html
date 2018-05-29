@@ -6,6 +6,7 @@
     <i *ngIf="hasEdit" class="fas fa-pencil-alt main-header__icon main-header__icon--edit" title="Bearbeiten" routerLink="{{listEditRoute}}"></i>
   </div>
   <div class="main-header__right">
+    <i class="fas fa-user main-header__icon main-header__icon--user" title="Angemeldeter Benutzer"></i>
     <span class="main-header__user">{{displayName ? displayName : email}}</span>
     <button class="main-header__logout" (click)="logout()">Abmelden</button>
   </div>

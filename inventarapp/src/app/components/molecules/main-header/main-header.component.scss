@@ -46,20 +46,35 @@
     padding-left: 0;
   }
 
+  &__icon--user {
+    font-size: 15px;
+    padding-right: $space-5;
+    color: $heaven-blue;
+  }
+
   &__logout {
     border: none;
-    background-color: $ocean-blue;
+    background-color: $heaven-blue;
     color: white;
     padding: $space-5 $space-5;
     border-radius: $radius-3;
-    outline: none;
     text-transform: uppercase;
     font-size: 11px;
-    cursor: pointer;
   }
 
   &__user {
     font-size: 12px;
     margin-right: $space-10;
+  }
+}
+
+@media (min-width: $bp-l) {
+  .main-header {
+    &__logout {
+      &:hover {
+        cursor: pointer;
+        background-color: darken($heaven-blue, 15);
+      }
+    }
   }
 }
