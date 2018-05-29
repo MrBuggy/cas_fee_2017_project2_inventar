@@ -9,6 +9,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { LoginComponent } from './login.component';
 import { AuthService } from '../../../services/auth.service';
 import { environment } from '../../../../environments/environment';
+import { SearchService } from '../../../services/search.service';
 import { ToastrModule } from 'ngx-toastr';
 
 describe('LoginComponent', () => {
@@ -27,7 +28,7 @@ describe('LoginComponent', () => {
         ToastrModule.forRoot()
       ],
       declarations: [LoginComponent],
-      providers: [AuthService]
+      providers: [AuthService, SearchService]
     })
       .compileComponents();
   }));
