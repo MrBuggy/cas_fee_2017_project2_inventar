@@ -1,9 +1,9 @@
 <div class="main-header">
   <div class="main-header__left">
-    <i *ngIf="hasBack" class="fas fa-angle-left main-header__icon" title="" (click)="btnBack.emit()"></i>
-    <i *ngIf="hasCancel" class="fas fa-times main-header__icon" title="" (click)="btnCancel.emit()"></i>
+    <i *ngIf="hasBack" class="fas fa-angle-left main-header__icon" title="Zur&uuml;ck" (click)="btnBack.emit()"></i>
+    <i *ngIf="hasCancel" class="fas fa-times main-header__icon" title="Abbrechen" (click)="btnCancel.emit()"></i>
     <span class="main-header__title">{{title ? title: 'Fehlerhafter Titel'}}</span>
-    <i *ngIf="hasEdit" class="fas fa-pencil-alt main-header__icon main-header__icon--edit" routerLink="{{listEditRoute}}"></i>
+    <i *ngIf="hasEdit" class="fas fa-pencil-alt main-header__icon main-header__icon--edit" title="Bearbeiten" routerLink="{{listEditRoute}}"></i>
   </div>
   <div class="main-header__right">
     <span class="main-header__user">{{displayName ? displayName : email}}</span>
