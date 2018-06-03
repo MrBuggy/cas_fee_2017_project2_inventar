@@ -18,6 +18,10 @@ Install packages
 
 `npm install`
 
+Unit Tests ausführen
+
+`ng test`
+
 App build and start
 
 `ng serve --open`
