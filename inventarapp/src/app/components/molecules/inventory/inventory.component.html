@@ -1,7 +1,7 @@
 <main-header [title]="componentName"></main-header>
 
 <div class="inventory">
-	<div *ngFor="let item of inventoryList | async" routerLink="/inventory-items/{{item.$key}}">
+  <div *ngFor="let item of inventoryList | async" routerLink="/inventory-items/{{item.$key}}">
     <list [item]="item" [displayString]="item.name"></list>
   </div>
 </div>

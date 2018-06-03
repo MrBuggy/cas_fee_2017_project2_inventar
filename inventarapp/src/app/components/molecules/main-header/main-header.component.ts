@@ -35,10 +35,10 @@ export class MainHeaderComponent implements OnInit {
 
   loadCurrentUser() {
     this.authService.loadCurrentUserProfile()
-    .subscribe(authState => {
-      this.authState = authState;
-      this.displayName = authState.displayName;
-      this.email = authState.email;
-    });
+      .subscribe(authState => {
+        this.authState = authState;
+        this.displayName = authState.displayName;
+        this.email = authState.email;
+      });
   }
 }

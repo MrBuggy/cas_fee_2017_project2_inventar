@@ -15,5 +15,4 @@ export class ActionButtonComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }
